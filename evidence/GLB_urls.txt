@@ -1,37 +1,37 @@
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/0285be8865787635/EW26_Developer_251207v5_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/0337cd9bc6d18b55/Renaissance_Globe_251209v2-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/050abac967c03cb4/Shipping_bg_diffuse-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/2e684892a34b58b8/EW26_Marketing_251209v4_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/2f9637a8c00c276d/Retail_mg_251205v2_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/340659b51fac6b47/Finance_bg_diffuse-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/374d9fa10f309fae/Shipping_fg_smaller_251127_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/3ee03829a1050ecd/Checkout_bg_diffuse-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/3ffd3b2a5abbe541/EW26_ShopApp_251208v3_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/46aedb6ec0619620/EW26_Online_251209v3_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/4f6a13588214983f/ShopApp_bg_diffuse-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/510af84586abddc1/EW26_Agentic_Props_251209v5_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/51718f8b2d221d54/EW26_Hero_251205_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/572da57473b77962/Marketing_fg_smaller_251127_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/614d6d0fa1836313/EW26_Finance_251208v2_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/63ac5b514230f82a/EW26_Sidekick_251208_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/6c9b3bf2f335a314/EW26_Sidekick_251207v4_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/71cef4bb822ef620/EW26_Developer_251128_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7293d075302eb118/Developer_bg_diffuse-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/73f4d9f62ba07f6e/EW26_B2B_251205v2_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/769326e346db969d/Operations_bg_diffuse-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7aca351ff49a1198/Checkout_fg_smaller_251127_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7b3adea2cd3c35d2/finance_fg_smaller_251127_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7ef7c7e3f77e5287/Online_fg_smaller_251127_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/843b7bb45340b0c3/EW26_Hero_251207v3_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/9567eaad495dfa3f/Rigged_Book_CS_Animated_V5_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/9eeb64e8194faa39/POS_V53_environment_251209v2_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/b44ac013cda7d317/EW26_Operations_251207_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/bba83c9869d8879f/Agentic_fg_251209_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/c4626bed57ec9dff/B2B_fg_smaller_251127_compressed-optimizedv2.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/d7e9deb5f8a6f4bd/Operations_fg_smaller_251127_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/e51a31d48a973f83/POS_v53_Hub_251208v2_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/e8cd2871309d6b03/EW26_Shipping_251204_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f10427420c475b24/EW26_ShopApp_251128v2_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f6baf7645c1fa52e/EW26_Sidekick_bg_stars-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f889c7c758e60536/EW26_Checkout_251209_compressed-optimized.glb
-0	https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f8cc4911eb12bc06/key.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/0285be8865787635/EW26_Developer_251207v5_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/0337cd9bc6d18b55/Renaissance_Globe_251209v2-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/050abac967c03cb4/Shipping_bg_diffuse-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/2e684892a34b58b8/EW26_Marketing_251209v4_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/2f9637a8c00c276d/Retail_mg_251205v2_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/340659b51fac6b47/Finance_bg_diffuse-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/374d9fa10f309fae/Shipping_fg_smaller_251127_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/3ee03829a1050ecd/Checkout_bg_diffuse-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/3ffd3b2a5abbe541/EW26_ShopApp_251208v3_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/46aedb6ec0619620/EW26_Online_251209v3_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/4f6a13588214983f/ShopApp_bg_diffuse-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/510af84586abddc1/EW26_Agentic_Props_251209v5_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/51718f8b2d221d54/EW26_Hero_251205_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/572da57473b77962/Marketing_fg_smaller_251127_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/614d6d0fa1836313/EW26_Finance_251208v2_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/63ac5b514230f82a/EW26_Sidekick_251208_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/6c9b3bf2f335a314/EW26_Sidekick_251207v4_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/71cef4bb822ef620/EW26_Developer_251128_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7293d075302eb118/Developer_bg_diffuse-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/73f4d9f62ba07f6e/EW26_B2B_251205v2_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/769326e346db969d/Operations_bg_diffuse-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7aca351ff49a1198/Checkout_fg_smaller_251127_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7b3adea2cd3c35d2/finance_fg_smaller_251127_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7ef7c7e3f77e5287/Online_fg_smaller_251127_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/843b7bb45340b0c3/EW26_Hero_251207v3_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/9567eaad495dfa3f/Rigged_Book_CS_Animated_V5_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/9eeb64e8194faa39/POS_V53_environment_251209v2_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/b44ac013cda7d317/EW26_Operations_251207_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/bba83c9869d8879f/Agentic_fg_251209_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/c4626bed57ec9dff/B2B_fg_smaller_251127_compressed-optimizedv2.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/d7e9deb5f8a6f4bd/Operations_fg_smaller_251127_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/e51a31d48a973f83/POS_v53_Hub_251208v2_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/e8cd2871309d6b03/EW26_Shipping_251204_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f10427420c475b24/EW26_ShopApp_251128v2_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f6baf7645c1fa52e/EW26_Sidekick_bg_stars-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f889c7c758e60536/EW26_Checkout_251209_compressed-optimized.glb
+https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f8cc4911eb12bc06/key.glb

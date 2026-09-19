@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 内联 favicon：省掉一次 /favicon.ico 的 404，也避免多一个文件 -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232f6f5e'/%3E%3Cpath d='M16 7l8 4.6v9.2L16 25l-8-4.2v-9.2z' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E"
+    />
+    <title>原站素材浏览器 · EW26 Teardown</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- ── 侧栏：素材清单 ─────────────────────────────────────────── -->
+      <aside id="side">
+        <header class="side-head">
+          <h1>原站素材浏览器</h1>
+          <p class="sub">
+            shopify.com/editions/winter2026 的公开 CDN 素材副本。<br />
+            左侧点选 → 右侧 3D 预览。
+          </p>
+        </header>
+
+        <div class="search-wrap">
+          <input id="search" type="search" placeholder="过滤文件名…（如 Hero / bg / Sidekick）" />
+        </div>
+
+        <div class="tabs" id="tabs"></div>
+
+        <div id="list" class="list"></div>
+
+        <footer class="side-foot" id="foot"></footer>
+      </aside>
+
+      <!-- ── 主区：3D / 贴图预览 ───────────────────────────────────── -->
+      <main id="stage">
+        <canvas id="gl"></canvas>
+
+        <div id="hud" class="hud"></div>
+
+        <div id="empty" class="empty">
+          <div class="empty-inner">
+            <div class="empty-icon">◲</div>
+            <p>从左侧选一个模型或贴图</p>
+            <p class="dim">
+              拖动旋转 · 滚轮缩放 · 右键平移
+            </p>
+          </div>
+        </div>
+
+        <div id="loading" class="loading" hidden>
+          <div class="spinner"></div>
+          <span id="loading-text">加载中…</span>
+        </div>
+
+        <div id="error" class="error" hidden></div>
+
+        <!-- 动画控制条（模型带动画时才显示） -->
+        <div id="anim" class="anim" hidden>
+          <button id="playBtn" type="button" title="播放 / 暂停">❚❚</button>
+          <input id="seek" type="range" min="0" max="1000" value="0" />
+          <span id="animTime" class="anim-time">0.00s</span>
+          <select id="clipSel"></select>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="/src/viewer/main.ts"></script>
+  </body>
+</html>
