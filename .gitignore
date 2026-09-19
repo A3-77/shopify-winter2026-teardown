@@ -9,6 +9,9 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
+# ---- release 附件（已随 GitHub Release 发布，不入库）----
+*.zip
+
 # ---- 编辑器 ----
 .vscode/
 .idea/

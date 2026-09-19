@@ -8,8 +8,23 @@
 ```bash
 npm install
 npm run dev
-# → http://127.0.0.1:5173
 ```
+
+跑起来后有**两个页面**：
+
+| URL | 是什么 |
+|---|---|
+| `http://127.0.0.1:5173/` | 本 README 讲的滚动复刻 Demo |
+| `http://127.0.0.1:5173/viewer.html` | **素材浏览器** —— 原站 748 个素材的 3D 实时预览 |
+
+> 素材浏览器需要仓库根的 `assets-original/` 存在。
+> 没有就跑一次 `python tools/fetch_assets.py --only 3d,data,font`（约 27 MB）。
+>
+> 它做的事：37 个 GLB 拖动旋转 / 带动画的可播放 / 40 张 KTX2 解码预览 /
+> HUD 显示真实顶点与三角面数。**解码器用的是 three 自带的 wasm，
+> 已拷到 `public/decoders/`，全程离线，不碰任何 CDN。**
+
+仓库级的使用说明（换素材 / 加章节 / 大文件在哪 / 常见坑）见根目录的 [`../USE.md`](../USE.md)。
 
 ---
 
