@@ -1,4 +1,4 @@
-# ---- 依赖与构建产物 ----
+# ---- 依赖与构建产物（可再生，不入库）----
 node_modules/
 replica/node_modules/
 dist/
@@ -8,22 +8,6 @@ replica/dist/
 npm-debug.log*
 .DS_Store
 Thumbs.db
-
-# ---- 原站版权内容（不纳入仓库）----
-# 这些是目标站点的生产代码与设计资产原样副本。
-# 本仓库是逆向分析报告 + 原创复刻实现，不转载他人代码。
-# 需要这些证据文件请用 tools/ 下的脚本自行采集（见 README「证据采集」一节）。
-bundles/
-theatre/
-evidence/page-source.html
-evidence/*.theatre.json
-evidence/ASSETS_full.json
-evidence/remixContext.json
-evidence/EXTRACT_*.txt
-evidence/X2_*.txt
-evidence/X3_*.txt
-evidence/SCROLL_HANDLER_pretty.txt
-evidence/X3_function*.txt
 
 # ---- 编辑器 ----
 .vscode/

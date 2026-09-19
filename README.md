@@ -112,10 +112,17 @@ edges = fwidth(luma) * mix(5, 10, progress)    ← 硬件导数，一行拿到�
 │   │   └── components/              React + DOM 层
 │   └── public/assets/               8 张程序化生成的占位素材
 │
-├── evidence/                        证据文件（部分因版权未纳入，见下）
+├── evidence/                        证据文件
 │   ├── SHADER_transition.glsl       过渡 shader 完整源码（118 行）
 │   ├── GLB_meta.json                37 个 GLB 完整元数据
-│   └── GLB_urls.txt                 37 个 GLB URL
+│   ├── GLB_urls.txt                 37 个 GLB URL
+│   ├── ASSETS_full.json             1247 个资产 URL 完整清单
+│   ├── page-source.html             原始 SSR HTML（1.45 MB）
+│   ├── theatre_summary.json         13 份 Theatre JSON 的提取汇总
+│   └── EXTRACT_*.txt / X2_*.txt / X3_*.txt   关键代码切片（滚动处理器 / hook / GLSL）
+│
+├── bundles/                         28 个 chunk（含 Background 1.0MB / Effects 66KB）
+├── theatre/                         13 份 Theatre 项目状态 JSON（约 470KB）
 │
 └── tools/
     ├── fetch_glb_meta.py            GLB 元数据采集（Range 请求 + 解析 JSON chunk，不解 Draco）
@@ -147,9 +154,9 @@ edges = fwidth(luma) * mix(5, 10, progress)    ← 硬件导数，一行拿到�
 
 ---
 
-## 证据采集（自行复现）
+## 证据采集（复现完整链路）
 
-仓库未纳入原站的生产代码与设计资产副本（原因见下）。想复现完整证据链：
+仓库已纳入全部采集结果。如果想自己重新跑一遍：
 
 ```bash
 # 1. 抓页面源码（含 SSR 内联的 1247 个资产 URL）
@@ -168,19 +175,24 @@ python tools/fetch_glb_meta.py     # 再采元数据
 
 ---
 
-## 关于版权
+## 关于版权与使用范围
 
-本仓库的定位是**逆向分析报告 + 原创复刻实现**，不是原站代码的镜像。
+**本仓库为个人研究用途，不对外分发。**
 
-- ✅ **纳入**：分析报告、复刻 Demo 源码、采集工具、shader 算法片段（作为分析论证材料）、
-  自行计算出的统计数据（顶点数、骨骼数等）
-- ❌ **未纳入**：原站完整的 JS bundle、完整 HTML、13 份 Theatre 项目 JSON、
-  完整资产 URL 清单 —— 这些是目标站点的生产代码与设计资产原样副本
+仓库内包含从公开可访问网站采集的证据文件原样副本（JS bundle、完整 HTML、13 份 Theatre
+项目 JSON、资产 URL 清单），纳入它们的目的是**让报告里每条结论都可复核** ——
+这是「证据级逆向」和「凭印象写拆解」的分界线。
+
+| 类别 | 内容 | 版权 |
+|---|---|---|
+| 原创产出 | 4 份分析报告、`replica/` Demo 源码、`tools/` 采集脚本 | MIT |
+| 原站内容副本 | `bundles/`、`theatre/`、`evidence/` 下的原始文件 | 归原权利人所有 |
 
 复刻 Demo 中的图片素材全部是**程序化生成**的占位图（`tools/gen_assets.py`），
 与原站素材无关。Demo 复现的是**技术机制**，不是视觉资产。
 
-分析对象为公开可访问的网站，分析目的是学习其前端实现方法。如有侵权请联系删除。
+分析对象为公开可访问的网站，分析目的是学习其前端实现方法。
+**请勿公开分发或用于商业用途。**
 
 ---
 
