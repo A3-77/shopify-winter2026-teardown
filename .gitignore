@@ -9,6 +9,9 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
+# Vite 改 vite.config.ts 时会落一个时间戳临时文件，别提交
+replica/vite.config.ts.timestamp-*.mjs
+
 # ---- release 附件（已随 GitHub Release 发布，不入库）----
 *.zip
 

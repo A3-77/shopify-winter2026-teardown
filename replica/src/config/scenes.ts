@@ -13,6 +13,7 @@
  */
 
 import type { AssetKey } from './assets';
+import { useOriginalAssets } from './assets';
 import { DESIGN } from './design';
 
 /* ------------------------------------------------------------------ 类型 */
@@ -45,6 +46,33 @@ export interface LayerConfig {
   asset: AssetKey;
 
   /**
+   * 图层类型。
+   *   'plane'（默认）—— 一张贴图铺在平面上，MeshBasicMaterial 无光照
+   *   'model'        —— 一个 GLB 模型，按包围盒自动缩放居中
+   *
+   * 两种可以混在同一个场景里（原站就是这么干的：背景是平面，
+   * 前景是带骨骼的 GLB 模型）。
+   */
+  type?: 'plane' | 'model';
+
+  /**
+   * 仅 `type: 'model'` —— 把模型缩放到「包围盒高度 = 该值 × 视口高」。
+   *
+   * 为什么要这个而不是直接用 GLB 自带的 scale：
+   *   37 个模型出自不同美术之手，单位尺度完全不统一（有的 0.5，有的 40）。
+   *   按包围盒归一化，才能让任何模型一进来就是合适的构图，
+   *   换模型时只调这一个数。
+   */
+  modelHeight?: number;
+
+  /**
+   * 仅 `type: 'model'` —— 是否播放模型自带的动画。
+   * 默认 false。开启后动画由**滚动进度**驱动（scrub），不是按墙上时钟播放 ——
+   * 原站的动画就是挂在 Theatre.js 时间轴上被 sequence.position 拖着走的。
+   */
+  scrubAnimations?: boolean;
+
+  /**
    * 图层在相机空间的 z 深度（负值 = 越远）。
    * 真实站点实测：asset-1 在 z=-7.09，asset-2 在 z=-25.46。
    * 「不同 z 的平面 + 透视相机」本身就是视差，不需要额外写视差代码 ——
@@ -71,6 +99,24 @@ export interface LayerConfig {
 
   /** 混合模式：normal 用于实拍层，additive 用于光晕/粒子层 */
   blending?: 'normal' | 'additive';
+
+  /**
+   * 该图层是否不透明。
+   *
+   * ★ 这个字段是为了修一个真实的渲染顺序 bug 才加的。
+   *   three 渲染时会先把所有**不透明**物体画完，再画**透明**物体 ——
+   *   这个分类发生在排序**之前**，renderOrder 管不了跨列表的先后。
+   *
+   *   所以「背景平面 transparent:true + 前景模型 opaque」的组合会翻车：
+   *   模型先画（不透明列表），背景后画（透明列表），且背景关掉了深度测试，
+   *   结果**背景直接把模型盖住**，模型白渲染一场（三角面数还在涨，就是看不见）。
+   *
+   *   把满幅背景标成 opaque，两者就落进同一个列表，renderOrder 才真正生效。
+   *   这也更贴合真实站点 —— 它的背景就是一块不透明的 quad。
+   *
+   * 默认 false（透明）。带 alpha 的中景/前景剪影要的就是透明，不要改。
+   */
+  opaque?: boolean;
 
   /** 该图层的属性轨道 */
   tracks: Track[];
@@ -126,7 +172,12 @@ const crossfadeFor = (index: number): number =>
 
 /* ------------------------------------------------------------------ 场景 */
 
-export const SCENES: SceneConfig[] = [
+/* ==========================================================================
+   场景组 A —— 占位素材（默认）
+   用 tools/gen_assets.py 生成的抽象图，开箱即跑，不携带原站美术资产。
+   ========================================================================== */
+
+const PLACEHOLDER_SCENES: SceneConfig[] = [
   /* ============================================================ 01 Hero */
   {
     id: 'scene-hero',
@@ -168,6 +219,8 @@ export const SCENES: SceneConfig[] = [
       {
         id: 'bg',
         asset: 'heroBg',
+        // 满幅背景标成不透明：见 LayerConfig.opaque 的注释（否则会盖住前景模型）
+        opaque: true,
         z: -30,
         overscan: 1.16,
         offset: [0, 0],
@@ -260,6 +313,7 @@ export const SCENES: SceneConfig[] = [
       {
         id: 'bg',
         asset: 'sidekickBg',
+        opaque: true,
         z: -32,
         overscan: 1.12,
         offset: [0, 0],
@@ -342,6 +396,7 @@ export const SCENES: SceneConfig[] = [
       {
         id: 'bg',
         asset: 'heroBg',
+        opaque: true,
         z: -34,
         overscan: 1.2,
         offset: [0, 0],
@@ -387,7 +442,317 @@ export const SCENES: SceneConfig[] = [
   },
 ];
 
+/* ==========================================================================
+   场景组 B —— 原站真实素材
+   ---------------------------------------------------------------------------
+   用 http://127.0.0.1:5173/?assets=original 打开。
+
+   与场景组 A 的区别不只是"图更好看"，而是**结构也不同**：
+     A：三层平面（bg / mid / fg），全部 MeshBasicMaterial，纯 2D 合成
+     B：KTX2 背景平面 + GLB 前景模型（带骨骼、带动画），原站的真实构成
+
+   也刻意做成**章节数不同**（A 三章 / B 四章），用来证明章节数完全由配置决定 ——
+   DOM 章节、总滚动高度、导航点都是从 SCENES 推出来的，不写死。
+
+   这正是把素材抓下来之后才做得成的 —— 报告里写"19/37 个模型用 unlit"、
+   "Hero 有 170 根骨骼"，只有真把 GLB 加载起来才算亲眼验证。
+
+   ⚠️ 这些是原站内容副本，版权归 Shopify 及原权利人，仅限个人研究。
+   ========================================================================== */
+
+const ORIGINAL_SCENES: SceneConfig[] = [
+  /* ==================================================== B1 Hero（原站素材） */
+  {
+    id: 'o-scene-hero',
+    handle: 'hero',
+    index: 0,
+    eyebrow: 'Original 01',
+    title: 'Winter 2026',
+    body:
+      '原站真实素材：KTX2 背景 + GLB 前景模型（36,125 顶点 / 170 骨骼 / 6 段动画）。' +
+      '动画由滚动进度驱动 —— 原站是挂在 Theatre.js 时间轴上被 sequence.position 拖着走的。',
+    accent: '#e8c08a',
+    background: '#1a1210',
+    heightVh: DESIGN.sectionHeightVh,
+    earlyCrossfade: crossfadeFor(0),
+    isHero: true,
+    fadeCenter: [0, 0, 0],
+    camera: {
+      z: 6.44,
+      fov: 25,
+      tracks: [
+        { path: 'position.z', keyframes: [
+          { t: 0.0, value: 6.44, ease: 'easeInOut' },
+          { t: 1.0, value: 4.60 },
+        ]},
+        { path: 'fov', keyframes: [
+          { t: 0.0, value: 25.0, ease: 'easeInOut' },
+          { t: 1.0, value: 22.27 },
+        ]},
+      ],
+    },
+    layers: [
+      {
+        id: 'bg',
+        type: 'plane',
+        asset: 'oHeroBg',
+        opaque: true,
+        z: -30,
+        overscan: 1.16,
+        offset: [0, 0],
+        tracks: [
+          { path: 'position.y', keyframes: [
+            { t: 0, value: 0.05, ease: 'easeInOut' }, { t: 1, value: -0.05 },
+          ]},
+          { path: 'scale.x', keyframes: [
+            { t: 0, value: 1.0, ease: 'easeOutCubic' }, { t: 1, value: 1.05 },
+          ]},
+        ],
+      },
+      {
+        id: 'model',
+        type: 'model',
+        asset: 'oHeroModel',
+        modelHeight: 0.86,
+        scrubAnimations: true,
+        z: -8,
+        overscan: 1,
+        offset: [0.06, -0.05],
+        tracks: [
+          { path: 'position.y', keyframes: [
+            { t: 0, value: 0.16, ease: 'easeInOut' }, { t: 1, value: -0.14 },
+          ]},
+          { path: 'position.x', keyframes: [
+            { t: 0, value: 0.03, ease: 'easeInOut' }, { t: 1, value: -0.02 },
+          ]},
+          { path: 'rotation.z', keyframes: [
+            { t: 0, value: 0.0, ease: 'easeInOut' }, { t: 1, value: 0.03 },
+          ]},
+        ],
+      },
+    ],
+  },
+
+  /* ================================================ B2 Sidekick（原站素材） */
+  {
+    id: 'o-scene-sidekick',
+    handle: 'sidekick',
+    index: 1,
+    eyebrow: 'Original 02',
+    title: 'Sidekick',
+    body:
+      '星空背景本身也是一个 GLB —— 但它只有 4 个顶点、2 个三角面，' +
+      '就是一块 quad，KTX2 贴图直接烘在 GLB 里。这是 04 报告第 2 节的现场验证。',
+    accent: '#8fd6e8',
+    background: '#0a1424',
+    heightVh: DESIGN.sectionHeightVh,
+    earlyCrossfade: crossfadeFor(1),
+    isHero: false,
+    fadeCenter: [0, 0, 0],
+    camera: {
+      z: 5.2,
+      fov: 24,
+      tracks: [
+        { path: 'position.z', keyframes: [
+          { t: 0.0, value: 5.20, ease: 'easeInOut' },
+          { t: 1.0, value: 7.20 },
+        ]},
+        { path: 'fov', keyframes: [
+          { t: 0.0, value: 24.0, ease: 'easeInOut' },
+          { t: 1.0, value: 28.0 },
+        ]},
+        { path: 'position.x', keyframes: [
+          { t: 0.0, value: -0.26, ease: 'easeInOut' },
+          { t: 1.0, value: 0.22 },
+        ]},
+      ],
+    },
+    layers: [
+      {
+        id: 'stars',
+        type: 'model',
+        asset: 'oSidekickStars',
+        modelHeight: 1.35,
+        z: -32,
+        overscan: 1,
+        offset: [0, 0],
+        tracks: [
+          { path: 'position.x', keyframes: [
+            { t: 0, value: 0.03, ease: 'easeInOut' }, { t: 1, value: -0.03 },
+          ]},
+        ],
+      },
+      {
+        id: 'model',
+        type: 'model',
+        asset: 'oSidekickModel',
+        modelHeight: 0.9,
+        z: -9,
+        overscan: 1,
+        offset: [0.1, -0.02],
+        tracks: [
+          { path: 'position.y', keyframes: [
+            { t: 0, value: -0.12, ease: 'easeInOut' }, { t: 1, value: 0.12 },
+          ]},
+          { path: 'rotation.z', keyframes: [
+            { t: 0, value: -0.05, ease: 'easeInOut' }, { t: 1, value: 0.04 },
+          ]},
+        ],
+      },
+    ],
+  },
+
+  /* ============================================= B3 Operations（原站素材） */
+  {
+    id: 'o-scene-operations',
+    handle: 'operations',
+    index: 2,
+    eyebrow: 'Original 03',
+    title: 'Operations',
+    body:
+      '全站最大的模型：144,040 顶点 / 65,780 三角面 / 20 骨骼。' +
+      'Draco 压缩后只有 726 KB —— 这个压缩比就是原站敢在首屏放几十个模型的底气。',
+    accent: '#a8e0b0',
+    background: '#0e1a14',
+    heightVh: DESIGN.sectionHeightVh,
+    earlyCrossfade: crossfadeFor(2),
+    isHero: false,
+    fadeCenter: [0, 0, 0],
+    camera: {
+      z: 7.0,
+      fov: 26,
+      tracks: [
+        { path: 'position.z', keyframes: [
+          { t: 0.0, value: 7.00, ease: 'easeInOut' },
+          { t: 1.0, value: 5.40 },
+        ]},
+        { path: 'fov', keyframes: [
+          { t: 0.0, value: 26.0, ease: 'easeInOut' },
+          { t: 1.0, value: 23.0 },
+        ]},
+        { path: 'position.y', keyframes: [
+          { t: 0.0, value: 0.14, ease: 'easeInOut' },
+          { t: 1.0, value: -0.12 },
+        ]},
+      ],
+    },
+    layers: [
+      {
+        id: 'bg',
+        type: 'plane',
+        asset: 'oOperationsBg',
+        opaque: true,
+        z: -34,
+        overscan: 1.18,
+        offset: [0, 0],
+        tracks: [
+          { path: 'position.y', keyframes: [
+            { t: 0, value: -0.03, ease: 'easeInOut' }, { t: 1, value: 0.05 },
+          ]},
+        ],
+      },
+      {
+        id: 'model',
+        type: 'model',
+        asset: 'oOperationsModel',
+        modelHeight: 0.82,
+        scrubAnimations: true,
+        z: -10,
+        overscan: 1,
+        offset: [0.02, -0.04],
+        tracks: [
+          { path: 'position.y', keyframes: [
+            { t: 0, value: 0.14, ease: 'easeInOut' }, { t: 1, value: -0.14 },
+          ]},
+        ],
+      },
+    ],
+  },
+
+  /* ================================================= B4 Finance（原站素材） */
+  {
+    id: 'o-scene-finance',
+    handle: 'finance',
+    index: 3,
+    eyebrow: 'Original 04',
+    title: 'Finance',
+    body:
+      '48,384 顶点 / 46,793 三角面 / 66 骨骼。这个模型声明了 KHR_materials_unlit —— ' +
+      '也就是它**不参与光照计算**，直接输出贴图色。和 Hero 正好构成两种材质的对照。',
+    accent: '#f0c46a',
+    background: '#1a1508',
+    heightVh: DESIGN.sectionHeightVh,
+    earlyCrossfade: crossfadeFor(3),
+    isHero: false,
+    fadeCenter: [0, 0, 0],
+    camera: {
+      z: 7.6,
+      fov: 27,
+      tracks: [
+        { path: 'position.z', keyframes: [
+          { t: 0.0, value: 7.60, ease: 'easeInOut' },
+          { t: 1.0, value: 5.80 },
+        ]},
+        { path: 'fov', keyframes: [
+          { t: 0.0, value: 27.0, ease: 'easeInOut' },
+          { t: 1.0, value: 24.0 },
+        ]},
+        { path: 'position.x', keyframes: [
+          { t: 0.0, value: 0.18, ease: 'easeInOut' },
+          { t: 1.0, value: -0.16 },
+        ]},
+      ],
+    },
+    layers: [
+      {
+        id: 'bg',
+        type: 'plane',
+        asset: 'oFinanceBg',
+        opaque: true,
+        z: -33,
+        overscan: 1.16,
+        offset: [0, 0],
+        tracks: [
+          { path: 'position.x', keyframes: [
+            { t: 0, value: -0.03, ease: 'easeInOut' }, { t: 1, value: 0.03 },
+          ]},
+        ],
+      },
+      {
+        id: 'model',
+        type: 'model',
+        asset: 'oFinanceModel',
+        modelHeight: 0.84,
+        scrubAnimations: true,
+        z: -9,
+        overscan: 1,
+        offset: [-0.04, -0.03],
+        tracks: [
+          { path: 'position.y', keyframes: [
+            { t: 0, value: 0.13, ease: 'easeInOut' }, { t: 1, value: -0.13 },
+          ]},
+          { path: 'rotation.z', keyframes: [
+            { t: 0, value: 0.02, ease: 'easeInOut' }, { t: 1, value: -0.02 },
+          ]},
+        ],
+      },
+    ],
+  },
+];
+
 /* ------------------------------------------------------------------ 派生 */
+
+/**
+ * 当前生效的场景组。
+ *
+ * 通过 URL 参数切换：`?assets=original`
+ * 为什么不做运行时热切换 —— 换素材意味着纹理、几何、材质全都要重建，
+ * 等于重新初始化一遍渲染器。刷新页面更干净，也没有中间状态。
+ */
+export const SCENES: SceneConfig[] = useOriginalAssets() ? ORIGINAL_SCENES : PLACEHOLDER_SCENES;
+
+/** 是否正在用原站真实素材（DOM 层用来显示提示） */
+export const USING_ORIGINAL = useOriginalAssets();
 
 /** 章节总高度（px）—— 用于给 DOM 章节分配高度、并算出整页滚动长度 */
 export const totalVh = SCENES.reduce((sum, s) => sum + s.heightVh, 0);

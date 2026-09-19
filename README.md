@@ -35,21 +35,31 @@ npm install
 npm run dev
 ```
 
-然后开两个页面：
+然后开三个页面：
 
 | URL | 是什么 |
 |---|---|
-| `http://127.0.0.1:5173/` | 滚动驱动的复刻 Demo（3 个章节 + 交叉溶解过渡） |
+| `http://127.0.0.1:5173/` | 滚动驱动的复刻 Demo（3 个章节 + 交叉溶解过渡），**程序化占位素材** |
+| `http://127.0.0.1:5173/?assets=original` | 同一个 Demo，但用**原站真实素材**（KTX2 背景 + GLB 蒙皮模型 + 滚动驱动动画） |
 | `http://127.0.0.1:5173/viewer.html` | 素材浏览器（37 个 GLB 可拖动旋转，带动画可播放） |
 
+两个 Demo 入口的实测差异（同一台机器，1783×842 画布）：
+
+| | `/` | `/?assets=original` |
+|---|---|---|
+| 场景构成 | 3 层平面，纯 2D 合成 | KTX2 背景平面 + GLB 前景模型 |
+| draw calls | 10 | 21 |
+| 三角面 | 20 | 49,101（Hero 章节） |
+| 控制台 | 干净 | 干净 |
+
 **完全离线可跑** —— Draco / KTX2 解码器用的是 `three` 包自带的 wasm，
-已拷到 `replica/public/decoders/`，不碰任何 CDN。
+已拷到 `replica/public/decoders/`，不碰任何 CDN（原站自己是指向 jsdelivr 的）。
 
 复刻细节见 [`replica/README.md`](replica/README.md)，使用说明见 [`USE.md`](USE.md)。
 
 ---
 
-## 七个最有价值的发现
+## 八个最有价值的发现
 
 ### 1. 它不是 3D 站，是"立体书"
 
@@ -58,8 +68,15 @@ npm run dev
 - **7 个 `*_bg_diffuse` 模型只有 4 个顶点、2 个三角面** —— 背景就是一块 quad + 内嵌 KTX2 贴图
 - **19 / 37 个模型用 `KHR_materials_unlit`（无光照材质）**，配合运行时实测的 `shadowMap: false`
 
-结论：**整站没有做 PBR 光照**。立体感来自「贴图本身是画好的插画 + 相机运动 + 后处理」，
+结论：**主体视觉不依赖 PBR 光照**。立体感来自「贴图本身是画好的插画 + 相机运动 + 后处理」，
 不是「建 3D 场景打光渲染」。这解释了为什么 87 万顶点看起来依然接近 2D。
+
+> **★ 2026-09-20 修正**：这条原先写成「整站没有做 PBR 光照」，**过于绝对**。
+> 把 GLB 真正加载进 three.js 之后才发现：另外 18 个模型（**包含 Hero / Sidekick / Operations
+> 这三个主体模型**）用的是 PBR 材质，不加光源渲染出来是全黑的。
+> 也就是「19 个不需要光 + 18 个需要光」，而不是「整站没有光照」。
+> 原站的光照参数（写死在 JS 里，GLB 内无 `KHR_lights_punctual`）**我确认不了**。
+> 详见 `04-几何全量统计与最终架构.md` §3.3。
 
 ### 2. 没有 depth map —— 流行说法被实测证伪
 
@@ -127,6 +144,38 @@ edges = fwidth(luma) * mix(5, 10, progress)    ← 硬件导数，一行拿到�
 另外，748 个唯一 URL 里有 **125 个被 Shopify CDN 重命名成了纯内容哈希**
 （如 `0dfe781a….mp4`），文件名不带任何语义 —— 这部分无法归类，如实标出。
 
+### 8. 三角面数有两种口径 —— 报告里的 883,812 是"去重几何"，不是 GPU 处理的量
+
+这条是**把 GLB 真正加载起来、和浏览器实测数字对不上**之后才发现的。
+
+glTF 里 `meshes` 和 `nodes` 是分开的：同一个 mesh 可以被多个 node 引用，
+three.js 会为每个 node 建一个 `Mesh`（共享 geometry）。所以"资产里有多少面"和
+"每帧送进 GPU 多少面"**不是同一个数**：
+
+| 口径 | 全站 37 个模型 |
+|---|---|
+| **几何口径**（遍历 `meshes[]`，报告此前用的） | **883,812 面** / 873,416 顶点 |
+| **渲染口径**（再按 node 引用次数重复计） | **888,438 面** / 877,622 顶点 |
+
+差 4,626 面（+0.52%），集中在 3 个有实例化 mesh 的模型上 ——
+`EW26_Finance_251208v2` 里 10 枚硬币共用一份几何，85 个 node 只对应 7 个 mesh。
+
+**交叉验证：** 三条独立路径把 Finance 章节的三角面数串成一条链 ——
+
+```
+Python 解析 GLB 的 JSON chunk   49,061   该模型（渲染口径）
++ 背景平面 quad                      2
++ 全屏后处理 quad ×5 次绘制          10   （过渡 / 亮度提取 / 模糊横竖 / 合成）
+────────────────────────────────────────
+浏览器 renderer.info.render        49,073   ← 逐位吻合
+```
+
+一边是纯 Python 解析二进制，一边是 GPU 实际渲染计数 —— 两条完全独立的路径给出同一个数。
+
+> 该引用哪个：衡量**资产规模**（下载体积、解码成本）用几何口径，这是对的；
+> 但别说成"GPU 每帧处理 88 万面"。原站每帧真实处理量属于【浏览器公开环境无法确认】。
+> 详见 `04-几何全量统计与最终架构.md` §3.5。
+
 ---
 
 ## 目录结构
@@ -179,6 +228,7 @@ edges = fwidth(luma) * mix(5, 10, progress)    ← 硬件导数，一行拿到�
 └── tools/
     ├── fetch_assets.py              ★ 全量拉取原站素材（含体积探测 / 去重 / 清单生成）
     ├── build_scene_map.py           ★ 按章节归类素材
+    ├── count_render_triangles.py    ★ 几何口径 vs 渲染口径的三角面数（见「发现 8」）
     ├── fetch_glb_meta.py            GLB 元数据采集（Range 请求 + 解析 JSON chunk，不解 Draco）
     ├── probe_glb.py                 GLB 体积探测
     └── gen_assets.py                复刻 Demo 的占位素材生成
@@ -230,11 +280,24 @@ python tools/fetch_assets.py                  # 全量
 
 # 5. 生成按章节的素材索引
 python tools/build_scene_map.py
+
+# 6. 复核三角面数的两种口径（几何口径 vs 渲染口径）
+python tools/count_render_triangles.py
 ```
 
 > 环境提示：Shopify 的 CDN 会拒绝不带 `User-Agent` 的请求（HEAD 与 GET 都是），
 > 带 UA 后正常。GLB 元数据采集用 `Range: bytes=0-262143` 只取头部，
 > 返回 `206 Partial Content` 与 `Content-Range`。
+
+**想验证报告里的数字，不用信我 —— 三条路都能自己跑：**
+
+| 想验证什么 | 跑什么 |
+|---|---|
+| 某个素材的 URL / 字节 / sha256 / 几何元数据 | 查 `assets-original/manifest.json` |
+| 素材按章节的分布 | `python tools/build_scene_map.py` |
+| 全站三角面数（两种口径） | `python tools/count_render_triangles.py` |
+| 某个模型的真实顶点/骨骼/动画 | 打开 `replica/viewer.html` 点它，HUD 显示的是浏览器实测值 |
+| 复刻 Demo 的实际渲染开销 | 打开 Demo，读 `window.__REPLICA__.renderer.info` |
 
 ---
 

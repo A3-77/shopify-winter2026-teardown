@@ -1,6 +1,12 @@
 import * as THREE from 'three';
+// ★ 必须用 SkeletonUtils.clone，不能用 Object3D.clone()。
+//   普通 clone 不会重建 SkinnedMesh 与 Skeleton/Bone 的绑定关系，
+//   蒙皮模型克隆出来会塌成一团、或者完全不动。
+//   注意 three r181 这里是**具名导出**（不是 SkeletonUtils 命名空间）。
+import { clone as cloneSkinned } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import type { AssetKey } from '../config/assets';
 import type { LayerConfig, SceneConfig } from '../config/scenes';
+import type { ModelAsset } from './loaders';
 import { evaluateTracks } from '../animation/timeline';
 
 /**
@@ -16,14 +22,34 @@ import { evaluateTracks } from '../animation/timeline';
  *   相机往前推 1 个单位，z=-7 的层在屏幕上放大的倍率远大于 z=-25 的层 ——
  *   视差不需要写任何代码，它是透视投影的几何后果，是硬件免费给的。
  *
- *   所以这里刻意"不在每帧重算平面尺寸"。平面的世界尺寸只在初始化时按
+ *   所以这里刻意"不在每帧重算尺寸"。平面的世界尺寸只在初始化时按
  *   「起始相机状态」定一次，之后相机怎么动都不改 —— 一旦每帧按当前距离重算，
  *   平面就会跟着相机一起缩放，视差会被完全抵消掉（这是最容易踩的坑）。
+ *
+ * ---------------------------------------------------------------------------
+ * 两种图层
+ * ---------------------------------------------------------------------------
+ *   plane —— 贴图平面，MeshBasicMaterial，无光照。用于背景/中景/前景的 2D 分层
+ *   model —— GLB 模型，按包围盒归一化缩放居中。用于原站真实素材
+ *
+ * 两者可以混在一个场景里。原站的实际构成就是「KTX2 背景平面 + GLB 前景模型」。
  */
 
 export interface BuiltLayer {
   config: LayerConfig;
-  mesh: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
+  /** 位置由轨道驱动的那个节点（plane 是 mesh 本身，model 是外层 group） */
+  object: THREE.Object3D;
+  /** 仅 plane */
+  mesh?: THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>;
+  /** 仅 model：归一化后的内层节点（居中 + 缩放） */
+  inner?: THREE.Object3D;
+  /** 仅 model：模型原始包围盒的高度（世界单位），setAspect 时用来重算缩放 */
+  modelSizeY?: number;
+  /** 仅 model：把归一化缩放重设到指定目标高度（setAspect 时调用） */
+  applyModelScale?: (targetHeight: number) => void;
+  /** 仅 model：动画混合器 + 总时长。动画由滚动进度 scrub */
+  mixer?: THREE.AnimationMixer;
+  clipDuration?: number;
   /** 基准状态下该深度处「刚好铺满视口」的世界高度。轨道数值的 1.0 = 一个视口高 */
   baseVisibleH: number;
   /** 基准位置（config 里的 offset），轨道位移叠加在它之上 */
@@ -40,7 +66,7 @@ export interface BuiltScene {
   layers: BuiltLayer[];
   /** 按归一化时间轴 0..1 更新相机与所有图层 */
   applyTime(t: number): void;
-  /** 视口比例变化时重算平面几何 */
+  /** 视口比例变化时重算几何与缩放 */
   setAspect(aspect: number): void;
   dispose(): void;
 }
@@ -51,16 +77,24 @@ function textureAspect(texture: THREE.Texture): number {
   return 1;
 }
 
+/** 该深度处「视口在世界空间的高度」—— 所有位移数值的单位 */
+function visibleHeightAt(config: SceneConfig, z: number, aspect: number): number {
+  void aspect;
+  const baseDist = Math.abs(config.camera.z - z);
+  return 2 * Math.tan(THREE.MathUtils.degToRad(config.camera.fov) / 2) * baseDist;
+}
+
 /**
- * 算一个图层平面的世界尺寸。
+ * 算一个平面图层的世界尺寸。
  *
- * ★ fit: 'contain' 是必须的，否则竖版人像会被横向拉成三角形。
- *   之前我漏了这一步，截图里中景直接变成一个大三角 —— 因为平面尺寸按
- *   视口比例（约 1.95）算，而贴图是 900×1200（0.75），拉伸了 2.6 倍。
+ * ★ fit 的语义严格对齐 CSS 的 object-fit：
+ *     cover   → 铺满视口，**保持贴图宽高比**，超出部分裁掉（可能裁切）
+ *     contain → 完整放进视口，**保持贴图宽高比**，不裁切（可能留边）
  *
- *   逻辑等价于 CSS 的 object-fit：
- *     cover   → 直接铺满视口（可能裁切）
- *     contain → 按纹理宽高比完整放入（先试高度适配，宽度超了就改按宽度适配）
+ *   ⚠️ cover 这里踩过一次：最初写成了 `width = viewW; height = visibleH`，
+ *   也就是**直接拉伸铺满、不管宽高比**。结果 1.563 的贴图被拉到 2.117 的视口上，
+ *   横向拉伸 1.35 倍，画面肉眼可见地变形，背景左边还露出一条黑边。
+ *   "cover" 和 "stretch" 是两回事，别混。
  *
  * visibleH 始终返回「视口在该深度处的高度」——
  * 它是轨道位移的单位（1.0 = 移动一个视口高），与平面自身尺寸无关。
@@ -71,15 +105,15 @@ function computePlaneSize(
   texture: THREE.Texture,
   aspect: number,
 ): { width: number; height: number; visibleH: number } {
-  const baseDist = Math.abs(config.camera.z - layer.z);
-  const visibleH = 2 * Math.tan(THREE.MathUtils.degToRad(config.camera.fov) / 2) * baseDist;
+  const visibleH = visibleHeightAt(config, layer.z, aspect);
   const viewW = visibleH * aspect;
+  const texAspect = textureAspect(texture);
 
   let width: number;
   let height: number;
 
   if ((layer.fit ?? 'cover') === 'contain') {
-    const texAspect = textureAspect(texture);
+    // 按高度放入，宽度超了改按宽度放入 —— 取"更小"的那个方向
     height = visibleH;
     width = height * texAspect;
     if (width > viewW) {
@@ -87,8 +121,13 @@ function computePlaneSize(
       height = width / texAspect;
     }
   } else {
-    height = visibleH;
+    // cover：按宽度铺满，高度不足就改按高度铺满 —— 取"更大"的那个方向
     width = viewW;
+    height = width / texAspect;
+    if (height < visibleH) {
+      height = visibleH;
+      width = height * texAspect;
+    }
   }
 
   return {
@@ -98,9 +137,68 @@ function computePlaneSize(
   };
 }
 
+/**
+ * 把模型归一化：几何中心移到原点，高度缩放到 targetH。
+ *
+ * 为什么必须归一化：37 个模型出自不同美术之手，单位尺度完全不统一
+ * （有的包围盒高度 0.5，有的 40）。不归一化的话，换个模型就得手工试 scale，
+ * 而且相机取景也会完全不同。归一化之后，"modelHeight" 这一个数就够构图了。
+ */
+function normalizeModel(
+  inner: THREE.Object3D,
+  targetH: number,
+): { sizeY: number; applyScale: (h: number) => void } {
+  const box = new THREE.Box3().setFromObject(inner);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  const sizeY = size.y || 1;
+
+  // 先归零：把几何中心搬到原点
+  inner.position.set(-center.x, -center.y, -center.z);
+
+  // 再把缩放放到一个外层节点上，避免和 position 互相干扰
+  const applyScale = (h: number): void => {
+    const s = h / sizeY;
+    inner.scale.setScalar(s);
+    // position 也要跟着缩放（因为 position 是在父节点空间里生效的）
+    inner.position.set(-center.x * s, -center.y * s, -center.z * s);
+  };
+  applyScale(targetH);
+
+  return { sizeY, applyScale };
+}
+
+/**
+ * ★ 光照强度 —— 这里踩过一个坑，值得说清楚。
+ *
+ * 原站 19/37 个模型用 `KHR_materials_unlit`（无光照），但**首屏那几个大模型不是**：
+ * 实测 Hero / Sidekick / Operations 三个都只带 Draco + KTX2 扩展，
+ * 也就是说它们用的是 PBR 材质，必须打光才看得见。
+ *
+ * 原站自己的光照参数是抓不到的（不在 GLB 里，也没有 KHR_lights_punctual），
+ * 所以只能自己定。第一版给的是 ambient 2.4 + key 2.2 + rim 1.0 ——
+ * 人物的白色衣服直接过曝成一块死白。
+ *
+ * 光靠调低强度治标不治本：three r155 之后光照走物理单位，
+ * 而且这个管线是 sRGB 直通，**没有高光滚降**，任何超过 1.0 的像素都被截断。
+ * 真正的解法是在渲染器上开 NeutralToneMapping（见 CanvasHost.tsx）——
+ * 平面材质显式关掉了色调映射所以仍是直通，只有模型吃到滚降。
+ *
+ * 有了滚降之后，光可以给得足一点，形体才出得来。下面这组值是实测定下来的。
+ */
+const LIGHTS = {
+  /** 环境光：决定暗部亮度。太高会让模型失去体积感 */
+  ambient: 1.05,
+  /** 主光：唯一产生明暗交界的光，负责形体 */
+  key: 1.6,
+  /** 补光：从反方向压一点，避免暗部死黑 */
+  rim: 0.45,
+} as const;
+
 export function buildScene(
   config: SceneConfig,
   textures: Map<AssetKey, THREE.Texture>,
+  models: Map<AssetKey, ModelAsset>,
   aspect: number,
 ): BuiltScene {
   const scene = new THREE.Scene();
@@ -109,9 +207,78 @@ export function buildScene(
   camera.position.set(0, 0, config.camera.z);
   scene.add(camera);
 
+  // 光照：PBR 模型需要，MeshBasicMaterial 的平面完全不受影响 —— 所以无条件加上是安全的
+  scene.add(new THREE.AmbientLight(0xffffff, LIGHTS.ambient));
+  const keyLight = new THREE.DirectionalLight(0xffffff, LIGHTS.key);
+  keyLight.position.set(2.5, 4, 6);
+  scene.add(keyLight);
+  const rimLight = new THREE.DirectionalLight(0xffffff, LIGHTS.rim);
+  rimLight.position.set(-3.5, -2.5, 2);
+  scene.add(rimLight);
+
   const camValues: Record<string, number> = {};
 
   const layers: BuiltLayer[] = config.layers.map((layerConfig, i) => {
+    const visibleH0 = visibleHeightAt(config, layerConfig.z, aspect);
+    const baseX = layerConfig.offset[0] * visibleH0 * aspect;
+    const baseY = layerConfig.offset[1] * visibleH0;
+
+    /* ------------------------------------------------ 模型图层 */
+    if (layerConfig.type === 'model') {
+      const asset = models.get(layerConfig.asset);
+      if (!asset) {
+        throw new Error(
+          `[SceneBuilder] 模型缺失: ${layerConfig.asset}（场景 ${config.id} / 图层 ${layerConfig.id}）。` +
+            `确认 assets-original/models/ 下有该文件，且 assets.ts 里声明了 kind: 'glb'。`,
+        );
+      }
+
+      // ★ 必须用 SkeletonUtils.clone，普通 .clone() 不会重建骨骼绑定，
+      //   蒙皮模型会塌成一团或者完全不动。
+      const cloned = cloneSkinned(asset.scene) as THREE.Group;
+
+      const group = new THREE.Group();
+      const targetH = (layerConfig.modelHeight ?? 0.9) * visibleH0;
+      const { sizeY, applyScale } = normalizeModel(cloned, targetH);
+      group.add(cloned);
+      group.position.set(baseX, baseY, layerConfig.z);
+      // ★ renderOrder 必须逐个子网格设置。
+      //   只设在 group 上没用 —— three 排序的是"渲染项"（每个 Mesh 一个），
+      //   而 group 本身不参与渲染。漏了这一步背景会盖住模型。
+      group.renderOrder = i;
+      cloned.traverse((o) => {
+        if ((o as THREE.Mesh).isMesh) o.renderOrder = i;
+      });
+      scene.add(group);
+
+      // 动画：由滚动进度 scrub，不是按墙上时钟播
+      let mixer: THREE.AnimationMixer | undefined;
+      let clipDuration: number | undefined;
+      if (layerConfig.scrubAnimations && asset.animations.length) {
+        mixer = new THREE.AnimationMixer(cloned);
+        // 只播第一段。原站每个模型有多个片段（Hero 有 6 段），
+        // 由 Theatre 时间轴决定什么时候切哪一段 —— 这里简化为一段。
+        const clip = asset.animations[0];
+        mixer.clipAction(clip).play();
+        clipDuration = clip.duration;
+      }
+
+      return {
+        config: layerConfig,
+        object: group,
+        inner: cloned,
+        modelSizeY: sizeY,
+        applyModelScale: applyScale,
+        mixer,
+        clipDuration,
+        baseVisibleH: visibleH0,
+        baseX,
+        baseY,
+        values: {},
+      };
+    }
+
+    /* ------------------------------------------------ 平面图层 */
     const map = textures.get(layerConfig.asset);
     if (!map) {
       throw new Error(
@@ -130,7 +297,8 @@ export function buildScene(
 
     const material = new THREE.MeshBasicMaterial({
       map,
-      transparent: true,
+      // ★ 满幅背景标成 opaque 才能和前景模型落进同一个渲染列表（见 LayerConfig.opaque 的注释）
+      transparent: !layerConfig.opaque,
       // 纯 2D 分层合成：关掉深度测试，靠 renderOrder 决定前后覆盖
       depthTest: false,
       depthWrite: false,
@@ -146,14 +314,19 @@ export function buildScene(
     mesh.renderOrder = i;
     // 顶点着色器/矩阵都在掌控内，关掉剔除避免误判
     mesh.frustumCulled = false;
-
-    const baseX = layerConfig.offset[0] * baseVisibleH * aspect;
-    const baseY = layerConfig.offset[1] * baseVisibleH;
     mesh.position.set(baseX, baseY, layerConfig.z);
 
     scene.add(mesh);
 
-    return { config: layerConfig, mesh, baseVisibleH, baseX, baseY, values: {} };
+    return {
+      config: layerConfig,
+      object: mesh,
+      mesh,
+      baseVisibleH,
+      baseX,
+      baseY,
+      values: {},
+    };
   });
 
   function applyTime(t: number): void {
@@ -176,16 +349,23 @@ export function buildScene(
       const v = layer.values;
       evaluateTracks(layer.config.tracks, t, v);
 
-      layer.mesh.position.set(
+      layer.object.position.set(
         layer.baseX + (v['position.x'] ?? 0) * layer.baseVisibleH * aspect,
         layer.baseY + (v['position.y'] ?? 0) * layer.baseVisibleH,
         layer.config.z + (v['position.z'] ?? 0),
       );
 
-      layer.mesh.scale.set(v['scale.x'] ?? 1, v['scale.y'] ?? 1, 1);
-      layer.mesh.rotation.z = v['rotation.z'] ?? 0;
+      layer.object.scale.set(v['scale.x'] ?? 1, v['scale.y'] ?? 1, 1);
+      layer.object.rotation.z = v['rotation.z'] ?? 0;
 
-      if ('opacity' in v) layer.mesh.material.opacity = v['opacity'];
+      if (layer.mesh && 'opacity' in v) layer.mesh.material.opacity = v['opacity'];
+
+      // ★ 动画 scrub：把混合器时间直接设成 t × 时长。
+      //   不是 mixer.update(dt) —— 那样动画会自己走，和滚动脱钩。
+      //   原站的动画就是被 Theatre 的 sequence.position 拖着走的。
+      if (layer.mixer && layer.clipDuration) {
+        layer.mixer.setTime(t * layer.clipDuration);
+      }
     }
   }
 
@@ -194,25 +374,34 @@ export function buildScene(
     camera.updateProjectionMatrix();
 
     for (const layer of layers) {
-      const map = layer.mesh.material.map;
-      if (!map) continue;
+      const visibleH = visibleHeightAt(config, layer.config.z, next);
+      layer.baseVisibleH = visibleH;
+      layer.baseX = layer.config.offset[0] * visibleH * next;
+      layer.baseY = layer.config.offset[1] * visibleH;
+
+      if (layer.config.type === 'model') {
+        // 模型：重算归一化缩放（目标高度是「视口高的倍数」，视口变了就得重算）
+        layer.applyModelScale?.((layer.config.modelHeight ?? 0.9) * visibleH);
+        continue;
+      }
+
+      // 平面：重建几何（PlaneGeometry 的宽高是烘在顶点里的，改 aspect 必须重建）
+      const map = layer.mesh?.material.map;
+      if (!map || !layer.mesh) continue;
 
       const size = computePlaneSize(config, layer.config, map, next);
-
-      // 重建几何：PlaneGeometry 的宽高是烘在顶点里的，改 aspect 必须重建
       layer.mesh.geometry.dispose();
       layer.mesh.geometry = new THREE.PlaneGeometry(size.width, size.height);
-
-      layer.baseVisibleH = size.visibleH;
-      layer.baseX = layer.config.offset[0] * size.visibleH * next;
-      layer.baseY = layer.config.offset[1] * size.visibleH;
     }
   }
 
   function dispose(): void {
     for (const layer of layers) {
-      layer.mesh.geometry.dispose();
-      layer.mesh.material.dispose();
+      layer.mixer?.stopAllAction();
+      if (layer.mesh) {
+        layer.mesh.geometry.dispose();
+        layer.mesh.material.dispose();
+      }
     }
     scene.clear();
   }

@@ -1,11 +1,10 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { Composer } from '../engine/Composer';
-import { disposeTextures, loadTextures } from '../engine/loaders';
+import { disposeAssets, loadAssets, type LoadedAssets } from '../engine/loaders';
 import { createScrollEngine, type ScrollEngine } from '../animation/smoothScroll';
 import { sectionStore } from '../store/sectionStore';
-import { USED_ASSETS } from '../config/scenes';
-import type { AssetKey } from '../config/assets';
+import { USED_ASSETS, USING_ORIGINAL } from '../config/scenes';
 
 /**
  * WebGL 宿主。
@@ -33,7 +32,7 @@ export function CanvasHost() {
     let raf = 0;
     let renderer: THREE.WebGLRenderer | null = null;
     let composer: Composer | null = null;
-    let textures: Map<AssetKey, THREE.Texture> | null = null;
+    let assets: LoadedAssets | null = null;
     let scrollEngine: ScrollEngine | null = null;
     let ro: ResizeObserver | null = null;
 
@@ -67,7 +66,16 @@ export function CanvasHost() {
 
         // sRGB 直通：这是一层"图像合成"，不做线性化才不会让画面整体偏暗
         renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
-        renderer.toneMapping = THREE.NoToneMapping;
+
+        // ★ 色调映射：只对模型生效，平面不受影响。
+        //   平面材质都显式设了 `toneMapped: false`，所以它们是纯直通；
+        //   而 PBR 模型（Hero / Sidekick / Operations 都是）在 NoToneMapping 下
+        //   一旦受光超过 1.0 就直接截断成死白 —— 实测人物白衣服整片过曝。
+        //   换成 Neutral 而不是 ACES：Neutral 只压高光、不抽色，
+        //   对插画质感的模型更合适（ACES 会把鲜艳的橙袍压成灰橙）。
+        renderer.toneMapping = THREE.NeutralToneMapping;
+        renderer.toneMappingExposure = 1.0;
+
         renderer.setClearColor(0x000000, 1);
 
         const el = renderer.domElement;
@@ -77,8 +85,13 @@ export function CanvasHost() {
         host.appendChild(el);
 
         // ---- 素材 ----
-        textures = await loadTextures(USED_ASSETS);
-        if (disposed) return;
+        // 注意顺序：KTX2 转码器需要 renderer 才能 detectSupport，
+        // 所以必须在 renderer 建好之后才能加载素材。
+        assets = await loadAssets(USED_ASSETS, renderer);
+        if (disposed) {
+          disposeAssets(assets);
+          return;
+        }
 
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         const w = host.clientWidth || window.innerWidth;
@@ -87,7 +100,7 @@ export function CanvasHost() {
         renderer.setPixelRatio(dpr);
         renderer.setSize(w, h, false);
 
-        composer = new Composer({ gl: renderer, textures });
+        composer = new Composer({ gl: renderer, textures: assets.textures, models: assets.models });
         composer.setSize(w, h, dpr);
 
         // 先量章节高度，再启动滚动 —— 顺序反了的话第一帧进度会算错
@@ -158,12 +171,20 @@ export function CanvasHost() {
       ro?.disconnect();
       scrollEngine?.dispose();
       composer?.dispose();
-      if (textures) disposeTextures(textures);
+      if (assets) disposeAssets(assets);
       renderer?.dispose();
       renderer?.domElement.remove();
       delete (window as unknown as Record<string, unknown>).__REPLICA__;
     };
   }, []);
 
-  return <div ref={hostRef} className="canvas-host" aria-hidden="true" />;
+  return (
+    <div
+      ref={hostRef}
+      className="canvas-host"
+      // 用原站真实素材时打个标记，DOM 层据此显示版权提示
+      data-original-assets={USING_ORIGINAL ? 'true' : undefined}
+      aria-hidden="true"
+    />
+  );
 }

@@ -4,6 +4,7 @@ import { SCENES } from '../config/scenes';
 import { sectionStore } from '../store/sectionStore';
 import { sceneTime, transitionProgress } from '../animation/scrollProgress';
 import { buildScene, type BuiltScene } from './SceneBuilder';
+import type { ModelAsset } from './loaders';
 import { createFullscreenQuad, type FullscreenQuad } from './fullscreenQuad';
 import { FULLSCREEN_VERTEX } from '../shaders/fullscreen';
 import { TRANSITION_FRAGMENT } from '../shaders/transition';
@@ -48,6 +49,8 @@ export interface ComposerStats {
 export interface ComposerOptions {
   gl: THREE.WebGLRenderer;
   textures: Map<AssetKey, THREE.Texture>;
+  /** GLB 模型表。用占位素材时为空 Map */
+  models: Map<AssetKey, ModelAsset>;
   /** 是否启用 bloom（默认 true）。关掉可以看清过渡 shader 的原始输出 */
   bloom?: boolean;
   /** 高光阈值 0..1 */
@@ -91,14 +94,14 @@ export class Composer {
   };
 
   constructor(options: ComposerOptions) {
-    const { gl, textures } = options;
+    const { gl, textures, models } = options;
     this.gl = gl;
     this.enableBloom = options.bloom ?? true;
     this.stats.bloom = this.enableBloom;
 
     // 建场景。注意每个 section 一个独立 THREE.Scene + 独立 PerspectiveCamera
     // （真实站点也是这样：每个章节有自己的 camera 关键帧轨道，互不干扰）
-    this.scenes = SCENES.map((cfg) => buildScene(cfg, textures, 1));
+    this.scenes = SCENES.map((cfg) => buildScene(cfg, textures, models, 1));
 
     // ---- 过渡 quad ----
     const transitionMaterial = new THREE.ShaderMaterial({

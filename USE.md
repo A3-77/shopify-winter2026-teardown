@@ -45,6 +45,20 @@ npm run dev
 
 这是 3 个章节的滚动驱动场景，带交叉溶解过渡。
 
+**同一个页面有两种素材模式**，加个 URL 参数就切换：
+
+| 打开这个 | 素材来自 | 场景构成 |
+|---|---|---|
+| `http://127.0.0.1:5173/` | `replica/public/assets/` 里的程序化占位图 | 3 层平面（bg / mid / fg），纯 2D 合成 |
+| `http://127.0.0.1:5173/?assets=original` | `assets-original/` 里的原站素材 | **KTX2 背景平面 + GLB 前景模型**（带骨骼、带动画） |
+
+第二种才是原站的真实构成 —— 背景是 KTX2 解压出来的贴图，前景是 Draco 压缩的蒙皮模型，
+动画由滚动进度 scrub 驱动。三个章节分别是 Hero（36,125 顶点 / 170 骨骼）、
+Sidekick（星空背景本身也是个 4 顶点 GLB）、Operations（144,040 顶点 / 65,780 面 / 20 骨骼）。
+
+> `?assets=original` 走的是 dev server 里的 `/original/*` 中间件，直接映射仓库根的
+> `assets-original/`，不需要额外拷贝。生产构建里则只打进去 3D 核心（98 文件 / 27.8 MB）。
+
 ### 读逆向结论
 
 ```bash
@@ -136,7 +150,8 @@ cd replica && npm run dev
 
 ```bash
 cd replica && npm run dev
-# → http://127.0.0.1:5173/
+# → http://127.0.0.1:5173/                 占位素材（默认）
+# → http://127.0.0.1:5173/?assets=original 原站真实素材
 ```
 
 滚动页面，观察：
@@ -148,6 +163,20 @@ cd replica && npm run dev
 调试面板在**右上角**，显示当前章节、进度、过渡进度、draw call。
 控制台里 `window.__REPLICA__` 暴露了 `renderer` / `composer` / `scrollEngine` / `sectionStore`，
 可以直接在 devtools 里改参数看效果。
+
+**两种素材模式实测数据（同一台机器，1783×842 画布）：**
+
+| | 占位模式 `/` | 原站素材 `/?assets=original` |
+|---|---|---|
+| draw calls | 10 | 21 |
+| 三角面 | 20（9 个平面 + 1 个全屏过渡 quad） | 49,101（Hero 章节） |
+| WebGL | 2.0 | 2.0 |
+| 色调映射 | NeutralToneMapping | NeutralToneMapping |
+| 控制台 | 干净 | 干净 |
+
+> 想改哪一章用哪套素材？看 `replica/src/config/scenes.ts` 里的
+> `PLACEHOLDER_SCENES` 与 `ORIGINAL_SCENES` —— 两组都是普通配置数组，
+> 加一组自己的、或者两套混着用都行。
 
 ### 3.3 报告 —— 看结论
 
@@ -229,24 +258,66 @@ export const ASSETS = {
 
 ### 4.4 用原站的真实素材
 
+**最快的方式是加 URL 参数**，不用改任何代码：
+
+```
+http://127.0.0.1:5173/?assets=original
+```
+
+这会把场景组从 `PLACEHOLDER_SCENES` 换成 `ORIGINAL_SCENES`
+（见 `src/config/scenes.ts`），素材全部指向 `assets-original/`。
+
+想自己指定某一张，就在 `assets.ts` 里写路径：
+
 ```ts
 // replica/src/config/assets.ts
 // 指向 assets-original 里拷出来的文件，或者直接用 dev server 的 /original/ 路径
 export const ASSETS = {
-  heroBg: 'original/textures/Hero-bg-hires-optimized.ktx2',
+  heroBg: { path: 'original/textures/Hero-bg-hires-optimized.ktx2', kind: 'ktx2' },
   ...
 }
 ```
 
 `/original/` 在 dev server 下由 `vite.config.ts` 里的中间件直接映射到
-仓库根的 `assets-original/`，不用拷贝。
+仓库根的 `assets-original/`，不用拷贝。**生产构建时**只打进去 3D 核心
+（`models/` + `textures/` + `data/` + `fonts/`，98 文件 / 27.8 MB）；
+想要全部 748 个文件，用 `EW26_COPY_ALL=1 npm run build`。
 
-> KTX2 需要走 `KTX2Loader`，不能直接喂给 `TextureLoader`。
-> `src/engine/loaders.ts` 里已经有分派逻辑。
+> `kind` 字段决定用哪个 loader 去加载。`image` 走 `TextureLoader`、
+> `ktx2` 走 `KTX2Loader`、`glb` 走 `GLTFLoader`（+ Draco）。
+> 分派逻辑在 `src/engine/loaders.ts`，不要在业务代码里手写 loader。
 
 ### 4.5 用原站的 GLB 模型
 
-`viewer.html` 已经演示了完整的加载链路（Draco 解几何 + KTX2 解贴图）：
+**别手写加载代码** —— 在 `scenes.ts` 里声明一个 `type: 'model'` 的图层就行：
+
+```ts
+{
+  id: 'model',
+  type: 'model',              // ← 默认是 'plane'
+  asset: 'oHeroModel',
+  modelHeight: 0.86,          // 包围盒高度 = 该值 × 视口高
+  scrubAnimations: true,      // 动画由滚动进度驱动，不是按墙上时钟播
+  z: -8,
+  overscan: 1,
+  offset: [0.06, -0.05],
+  tracks: [ /* 和平面图层一样的轨道格式 */ ],
+}
+```
+
+三个字段值得说清楚：
+
+- **`modelHeight`** —— 37 个模型出自不同美术之手，单位尺度完全不统一（有的 0.5，有的 40）。
+  按包围盒归一化，换模型时只调这一个数。
+- **`scrubAnimations`** —— 开启后是 `mixer.setTime(t × clipDuration)`，
+  **不是** `mixer.update(dt)`。原站的动画就是挂在 Theatre.js 时间轴上被
+  `sequence.position` 拖着走的，用 `update(dt)` 会变成自播、和滚动脱节。
+- **`opaque`** —— 满幅背景平面必须标 `true`，否则会**盖住前景模型**。
+  three 先渲不透明、后渲透明，这个分类发生在 `renderOrder` 排序**之前**，
+  所以"透明背景 + 不透明模型"会让背景后画、把模型整个盖掉。
+  症状很迷惑：三角面数在涨（说明模型确实在渲染），但屏幕上什么都看不见。
+
+底层链路（`viewer.html` 用的就是这套，想自己写可以参考）：
 
 ```ts
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -261,7 +332,12 @@ const gltf = await loader.loadAsync('./original/models/EW26_Hero_251207v3_compre
 scene.add(gltf.scene);
 ```
 
-解码器在 `replica/public/decoders/`，**离线可用，不依赖任何 CDN**。
+解码器在 `replica/public/decoders/`，**离线可用，不依赖任何 CDN**
+（原站自己是指向 jsdelivr 的）。
+
+> 蒙皮模型克隆**必须**用 `SkeletonUtils.clone`，普通 `Object3D.clone()`
+> 不重建骨骼绑定，模型会塌成一团。three r181 里它是具名导出：
+> `import { clone as cloneSkinned } from 'three/examples/jsm/utils/SkeletonUtils.js'`。
 
 ---
 
@@ -321,6 +397,9 @@ python tools/fetch_assets.py --only 3d,data,font
 
 # 重新生成按章节的分组索引
 python tools/build_scene_map.py
+
+# 复核全站三角面数（几何口径 vs 渲染口径，见 04 报告 §3.5）
+python tools/count_render_triangles.py
 ```
 
 脚本的要点：
@@ -377,6 +456,31 @@ python tools/build_scene_map.py   # 打印按章节的素材分布
 
 图层没配 `fit: 'contain'`。见 §4.3。
 
+**Q: 加了 `?assets=original` 但画面没变 / 模型加载失败**
+
+三种可能：
+1. `assets-original/` 不在（见上一个 Q），dev server 拿不到 `/original/*`
+2. URL 参数拼错 —— 必须是 `?assets=original`，不是 `?assets=origin` 或 `?original=1`
+3. 你在看**生产构建**的 `dist/`，而构建时只打了 3D 核心。原站素材模式需要的
+   `models/` + `textures/` 正好都在核心集里，所以构建产物是支持的；
+   但如果连这 27 MB 都没有（比如用了 `EW26_COPY_ALL` 之外的手工裁剪），就会 404。
+
+排查：devtools Network 面板看 `/original/models/*.glb` 的响应码。
+正常应该是 200；404 说明中间件没映射到，403 说明路径穿越防护拦了。
+
+**Q: 模型渲染出来了但被背景盖住（屏幕上什么都没有，三角面数却在涨）**
+
+背景图层缺 `opaque: true`。见 §4.5 的 `opaque` 说明。
+
+**Q: 模型白得刺眼 / 高光死白**
+
+色调映射没开。渲染器需要 `THREE.NeutralToneMapping`，同时**平面材质**要显式
+`toneMapped: false` 保持直通（平面是插画/照片，不该被压缩），
+**模型材质**要保留 `toneMapped`（默认 true）以获得高光滚降。
+`src/components/CanvasHost.tsx` 与 `src/engine/SceneBuilder.ts` 里已经这么做了。
+
+不要用 `ACESFilmicToneMapping` —— 它会把鲜艳的橙袍压成灰橙，原站的插画质感会丢。
+
 **Q: 章节切换时画面闪断**
 
 检查你有没有把 raw progress 直接喂给 `uProgress`。
@@ -412,9 +516,15 @@ KTX2 的实际压缩格式、画布钉住机制、GSAP 未被使用、Theatre.js
 线上实际请求的是哪一份 GLB 版本。
 
 **复刻 Demo 与原站的已知差异**：
-用 3 个章节（原站 13 个）、用平面图代替 GLB 模型、
-用本地关键帧求值器代替 Theatre.js 运行时、bloom 是简化版。
-完整清单见 `replica/README.md` 的「已知简化项」。
+用 3 个章节（原站 13 个）、
+用本地关键帧求值器代替 Theatre.js 运行时、bloom 是简化版、
+章节顺序与文案是我编的（不是原站的章节内容）。
+原站那 13 章的完整清单在 `02-动画拆解.md` 里。
+
+> 注意：`?assets=original` 模式下**素材是真的**（原站 GLB + KTX2），
+> 但**编排是复刻的** —— 用哪些模型、放在哪一章、什么运动曲线，是我按原站
+> 的结构重新组织的，不等于原站的实际编排。原站的实际编排只有
+> `theatre/` 里的 13 份工程 JSON 能证明，那份是权威依据。
 
 ---
 
