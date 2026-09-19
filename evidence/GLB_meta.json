@@ -1,0 +1,2599 @@
+{
+ "ok": [
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/614d6d0fa1836313/EW26_Finance_251208v2_compressed-optimized.glb",
+   "file": "EW26_Finance_251208v2_compressed-optimized.glb",
+   "bytes": 929462,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 85,
+   "meshes": 7,
+   "primitives": 8,
+   "vertices": 48384,
+   "indices": 140379,
+   "triangles": 46793,
+   "materials": 5,
+   "textures": 3,
+   "images": 3,
+   "skins": 3,
+   "animations": 1,
+   "bones": 66,
+   "skinned_primitives": 3,
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "l-tree",
+     "verts": 5260,
+     "indices": 15450
+    },
+    {
+     "name": "r-tree",
+     "verts": 5279,
+     "indices": 15444
+    },
+    {
+     "name": "Finance Woman",
+     "verts": 34920,
+     "indices": 95457
+    },
+    {
+     "name": "Plane.008",
+     "verts": 1261,
+     "indices": 6282
+    },
+    {
+     "name": "shiny-coin1",
+     "verts": 262,
+     "indices": 756
+    },
+    {
+     "name": "Plane.003",
+     "verts": 1252,
+     "indices": 6222
+    },
+    {
+     "name": "Plane.009",
+     "verts": 150,
+     "indices": 768
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/843b7bb45340b0c3/EW26_Hero_251207v3_compressed-optimized.glb",
+   "file": "EW26_Hero_251207v3_compressed-optimized.glb",
+   "bytes": 909293,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 194,
+   "meshes": 15,
+   "primitives": 15,
+   "vertices": 36125,
+   "indices": 147267,
+   "triangles": 49089,
+   "materials": 3,
+   "textures": 2,
+   "images": 2,
+   "skins": 8,
+   "animations": 1,
+   "bones": 170,
+   "skinned_primitives": 10,
+   "attributes": [
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Robed Woman",
+     "verts": 7090,
+     "indices": 23958
+    },
+    {
+     "name": "Plane",
+     "verts": 1233,
+     "indices": 6126
+    },
+    {
+     "name": "Coffee Cup",
+     "verts": 3016,
+     "indices": 11784
+    },
+    {
+     "name": "Plane.010",
+     "verts": 1192,
+     "indices": 5904
+    },
+    {
+     "name": "BézierCurve.001",
+     "verts": 778,
+     "indices": 2220
+    },
+    {
+     "name": "BézierCurve.005",
+     "verts": 752,
+     "indices": 2208
+    },
+    {
+     "name": "shiny-skatedeck",
+     "verts": 4012,
+     "indices": 11934
+    },
+    {
+     "name": "Wheel_03_Skateboard_0",
+     "verts": 895,
+     "indices": 4314
+    },
+    {
+     "name": "zform_hero-nov17_Diffuse.004",
+     "verts": 678,
+     "indices": 3666
+    },
+    {
+     "name": "zform_hero-nov17_Diffuse.001",
+     "verts": 604,
+     "indices": 3309
+    },
+    {
+     "name": "Plane.011",
+     "verts": 1182,
+     "indices": 5838
+    },
+    {
+     "name": "Plane.012",
+     "verts": 1183,
+     "indices": 5838
+    },
+    {
+     "name": "BézierCurve.003",
+     "verts": 477,
+     "indices": 2115
+    },
+    {
+     "name": "BézierCurve.006",
+     "verts": 478,
+     "indices": 2115
+    },
+    {
+     "name": "Mesh_0.002",
+     "verts": 12555,
+     "indices": 55938
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/9eeb64e8194faa39/POS_V53_environment_251209v2_compressed-optimized.glb",
+   "file": "POS_V53_environment_251209v2_compressed-optimized.glb",
+   "bytes": 880976,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 7,
+   "meshes": 4,
+   "primitives": 4,
+   "vertices": 3124,
+   "indices": 11106,
+   "triangles": 3702,
+   "materials": 3,
+   "textures": 2,
+   "images": 2,
+   "skins": 0,
+   "animations": 1,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Cylinder.005",
+     "verts": 48,
+     "indices": 144
+    },
+    {
+     "name": "Cylinder.001",
+     "verts": 1952,
+     "indices": 5328
+    },
+    {
+     "name": "Cylinder.002",
+     "verts": 896,
+     "indices": 4992
+    },
+    {
+     "name": "Mesh.002",
+     "verts": 228,
+     "indices": 642
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7b3adea2cd3c35d2/finance_fg_smaller_251127_compressed-optimized.glb",
+   "file": "finance_fg_smaller_251127_compressed-optimized.glb",
+   "bytes": 854053,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 85,
+   "meshes": 7,
+   "primitives": 8,
+   "vertices": 46271,
+   "indices": 131037,
+   "triangles": 43679,
+   "materials": 4,
+   "textures": 3,
+   "images": 3,
+   "skins": 3,
+   "animations": 1,
+   "bones": 66,
+   "skinned_primitives": 3,
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "l-tree",
+     "verts": 4243,
+     "indices": 10866
+    },
+    {
+     "name": "r-tree",
+     "verts": 4211,
+     "indices": 10686
+    },
+    {
+     "name": "Finance Woman",
+     "verts": 34920,
+     "indices": 95457
+    },
+    {
+     "name": "Plane.008",
+     "verts": 1261,
+     "indices": 6282
+    },
+    {
+     "name": "Cylinder",
+     "verts": 194,
+     "indices": 756
+    },
+    {
+     "name": "Plane.003",
+     "verts": 1252,
+     "indices": 6222
+    },
+    {
+     "name": "Plane.009",
+     "verts": 190,
+     "indices": 768
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/51718f8b2d221d54/EW26_Hero_251205_compressed-optimized.glb",
+   "file": "EW26_Hero_251205_compressed-optimized.glb",
+   "bytes": 845536,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 194,
+   "meshes": 15,
+   "primitives": 15,
+   "vertices": 36126,
+   "indices": 147267,
+   "triangles": 49089,
+   "materials": 3,
+   "textures": 2,
+   "images": 2,
+   "skins": 8,
+   "animations": 1,
+   "bones": 170,
+   "skinned_primitives": 10,
+   "attributes": [
+    "JOINTS_0",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Robed Woman",
+     "verts": 7090,
+     "indices": 23958
+    },
+    {
+     "name": "Plane",
+     "verts": 1233,
+     "indices": 6126
+    },
+    {
+     "name": "Coffee Cup",
+     "verts": 3016,
+     "indices": 11784
+    },
+    {
+     "name": "Plane.010",
+     "verts": 1192,
+     "indices": 5904
+    },
+    {
+     "name": "BézierCurve.001",
+     "verts": 778,
+     "indices": 2220
+    },
+    {
+     "name": "BézierCurve.005",
+     "verts": 752,
+     "indices": 2208
+    },
+    {
+     "name": "shiny-skatedeck",
+     "verts": 4012,
+     "indices": 11934
+    },
+    {
+     "name": "Wheel_03_Skateboard_0",
+     "verts": 895,
+     "indices": 4314
+    },
+    {
+     "name": "zform_hero-nov17_Diffuse.004",
+     "verts": 679,
+     "indices": 3666
+    },
+    {
+     "name": "zform_hero-nov17_Diffuse.001",
+     "verts": 604,
+     "indices": 3309
+    },
+    {
+     "name": "Plane.011",
+     "verts": 1182,
+     "indices": 5838
+    },
+    {
+     "name": "Plane.012",
+     "verts": 1183,
+     "indices": 5838
+    },
+    {
+     "name": "BézierCurve.003",
+     "verts": 477,
+     "indices": 2115
+    },
+    {
+     "name": "BézierCurve.006",
+     "verts": 478,
+     "indices": 2115
+    },
+    {
+     "name": "Mesh_0.002",
+     "verts": 12555,
+     "indices": 55938
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/c4626bed57ec9dff/B2B_fg_smaller_251127_compressed-optimizedv2.glb",
+   "file": "B2B_fg_smaller_251127_compressed-optimizedv2.glb",
+   "bytes": 784278,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 124,
+   "meshes": 9,
+   "primitives": 9,
+   "vertices": 55678,
+   "indices": 129291,
+   "triangles": 43097,
+   "materials": 3,
+   "textures": 3,
+   "images": 3,
+   "skins": 4,
+   "animations": 1,
+   "bones": 111,
+   "skinned_primitives": 5,
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Sidekick_fg.004",
+     "verts": 102,
+     "indices": 366
+    },
+    {
+     "name": "Sidekick_fg.001",
+     "verts": 113,
+     "indices": 372
+    },
+    {
+     "name": "Mesh",
+     "verts": 3370,
+     "indices": 17913
+    },
+    {
+     "name": "Cube.001",
+     "verts": 344,
+     "indices": 1089
+    },
+    {
+     "name": "zform_B2B_Heads",
+     "verts": 19507,
+     "indices": 22185
+    },
+    {
+     "name": "Plane.004",
+     "verts": 1240,
+     "indices": 6135
+    },
+    {
+     "name": "Plane.005",
+     "verts": 1233,
+     "indices": 6108
+    },
+    {
+     "name": "zform_B2B_Heads.001",
+     "verts": 17513,
+     "indices": 18855
+    },
+    {
+     "name": "tripo_mesh_dc21b46c-e06a-4af7-924d-de0df043a851.002",
+     "verts": 12256,
+     "indices": 56268
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/2f9637a8c00c276d/Retail_mg_251205v2_compressed-optimized.glb",
+   "file": "Retail_mg_251205v2_compressed-optimized.glb",
+   "bytes": 727986,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 77,
+   "meshes": 13,
+   "primitives": 21,
+   "vertices": 35379,
+   "indices": 117564,
+   "triangles": 39188,
+   "materials": 10,
+   "textures": 3,
+   "images": 3,
+   "skins": 5,
+   "animations": 1,
+   "bones": 58,
+   "skinned_primitives": 10,
+   "attributes": [
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_ior",
+    "KHR_materials_specular",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "env-backwall",
+     "verts": 3148,
+     "indices": 14226
+    },
+    {
+     "name": "pos-device-ipad.001",
+     "verts": 156,
+     "indices": 462
+    },
+    {
+     "name": "pos-device-ipad",
+     "verts": 5041,
+     "indices": 21423
+    },
+    {
+     "name": "pos-device-scanner",
+     "verts": 14997,
+     "indices": 34650
+    },
+    {
+     "name": "Mesh.001",
+     "verts": 242,
+     "indices": 1269
+    },
+    {
+     "name": "shine-poscordscanner",
+     "verts": 480,
+     "indices": 2652
+    },
+    {
+     "name": "shiny-bar1",
+     "verts": 4846,
+     "indices": 15036
+    },
+    {
+     "name": "shiny-pos-psu-end",
+     "verts": 815,
+     "indices": 3861
+    },
+    {
+     "name": "shiny-pos-usb-end-1",
+     "verts": 1192,
+     "indices": 5466
+    },
+    {
+     "name": "shiny-pos-usb-end-2",
+     "verts": 1190,
+     "indices": 5466
+    },
+    {
+     "name": "pos-ethernet-end",
+     "verts": 1643,
+     "indices": 5637
+    },
+    {
+     "name": "shiny-cord",
+     "verts": 876,
+     "indices": 5244
+    },
+    {
+     "name": "shiny-cord.001",
+     "verts": 753,
+     "indices": 2172
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/d7e9deb5f8a6f4bd/Operations_fg_smaller_251127_compressed-optimized.glb",
+   "file": "Operations_fg_smaller_251127_compressed-optimized.glb",
+   "bytes": 710294,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 27,
+   "meshes": 6,
+   "primitives": 6,
+   "vertices": 144040,
+   "indices": 197340,
+   "triangles": 65780,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 1,
+   "animations": 6,
+   "bones": 20,
+   "skinned_primitives": 1,
+   "attributes": [
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "zform_Operations_fg_diffuse",
+     "verts": 142213,
+     "indices": 194613
+    },
+    {
+     "name": "eyes-m-01",
+     "verts": 449,
+     "indices": 669
+    },
+    {
+     "name": "eyes-m-02",
+     "verts": 314,
+     "indices": 462
+    },
+    {
+     "name": "eyes-m-03",
+     "verts": 400,
+     "indices": 594
+    },
+    {
+     "name": "eyes-w-01",
+     "verts": 290,
+     "indices": 438
+    },
+    {
+     "name": "eyes-w-02",
+     "verts": 374,
+     "indices": 564
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/46aedb6ec0619620/EW26_Online_251209v3_compressed-optimized.glb",
+   "file": "EW26_Online_251209v3_compressed-optimized.glb",
+   "bytes": 693562,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 41,
+   "meshes": 6,
+   "primitives": 6,
+   "vertices": 26652,
+   "indices": 78807,
+   "triangles": 26269,
+   "materials": 3,
+   "textures": 2,
+   "images": 2,
+   "skins": 2,
+   "animations": 4,
+   "bones": 33,
+   "skinned_primitives": 2,
+   "attributes": [
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "online_computer",
+     "verts": 8585,
+     "indices": 20550
+    },
+    {
+     "name": "online_canvas",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "online-man",
+     "verts": 16531,
+     "indices": 51099
+    },
+    {
+     "name": "online_hand.001",
+     "verts": 1243,
+     "indices": 6156
+    },
+    {
+     "name": "brush",
+     "verts": 151,
+     "indices": 636
+    },
+    {
+     "name": "shiny-brush",
+     "verts": 118,
+     "indices": 330
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/e8cd2871309d6b03/EW26_Shipping_251204_compressed-optimized.glb",
+   "file": "EW26_Shipping_251204_compressed-optimized.glb",
+   "bytes": 689634,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 64,
+   "meshes": 9,
+   "primitives": 9,
+   "vertices": 29508,
+   "indices": 148965,
+   "triangles": 49655,
+   "materials": 2,
+   "textures": 2,
+   "images": 2,
+   "skins": 2,
+   "animations": 3,
+   "bones": 46,
+   "skinned_primitives": 2,
+   "attributes": [
+    "JOINTS_0",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Shopping Stand",
+     "verts": 109,
+     "indices": 258
+    },
+    {
+     "name": "Cheetah",
+     "verts": 29025,
+     "indices": 147699
+    },
+    {
+     "name": "Shipping_fg_label_diffuse",
+     "verts": 4,
+     "indices": 6
+    },
+    {
+     "name": "Shipping Box",
+     "verts": 42,
+     "indices": 84
+    },
+    {
+     "name": "Shipping Box.010",
+     "verts": 4,
+     "indices": 6
+    },
+    {
+     "name": "Shipping Box.009",
+     "verts": 4,
+     "indices": 6
+    },
+    {
+     "name": "Shipping Box.003",
+     "verts": 4,
+     "indices": 6
+    },
+    {
+     "name": "Shipping Box.002",
+     "verts": 4,
+     "indices": 6
+    },
+    {
+     "name": "Belt",
+     "verts": 312,
+     "indices": 894
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/0285be8865787635/EW26_Developer_251207v5_compressed-optimized.glb",
+   "file": "EW26_Developer_251207v5_compressed-optimized.glb",
+   "bytes": 672456,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 66,
+   "meshes": 29,
+   "primitives": 29,
+   "vertices": 14458,
+   "indices": 68184,
+   "triangles": 22728,
+   "materials": 2,
+   "textures": 2,
+   "images": 2,
+   "skins": 2,
+   "animations": 1,
+   "bones": 34,
+   "skinned_primitives": 2,
+   "attributes": [
+    "JOINTS_0",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Developer_fg.001",
+     "verts": 12671,
+     "indices": 61488
+    },
+    {
+     "name": "checkout-hand.003",
+     "verts": 1161,
+     "indices": 5724
+    },
+    {
+     "name": "Cube.014",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.015",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.016",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.017",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.018",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.019",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.020",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.021",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.022",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.023",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.024",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.025",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.026",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.027",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.028",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.029",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.030",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.031",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.032",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.033",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.034",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.035",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.036",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.037",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.038",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.039",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.040",
+     "verts": 24,
+     "indices": 36
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/71cef4bb822ef620/EW26_Developer_251128_compressed-optimized.glb",
+   "file": "EW26_Developer_251128_compressed-optimized.glb",
+   "bytes": 672256,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 66,
+   "meshes": 29,
+   "primitives": 29,
+   "vertices": 14458,
+   "indices": 68184,
+   "triangles": 22728,
+   "materials": 2,
+   "textures": 2,
+   "images": 2,
+   "skins": 2,
+   "animations": 1,
+   "bones": 34,
+   "skinned_primitives": 2,
+   "attributes": [
+    "JOINTS_0",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Developer_fg.001",
+     "verts": 12671,
+     "indices": 61488
+    },
+    {
+     "name": "checkout-hand.003",
+     "verts": 1161,
+     "indices": 5724
+    },
+    {
+     "name": "Cube.014",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.015",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.016",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.017",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.018",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.019",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.020",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.021",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.022",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.023",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.024",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.025",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.026",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.027",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.028",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.029",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.030",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.031",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.032",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.033",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.034",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.035",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.036",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.037",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "Cube.038",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.039",
+     "verts": 22,
+     "indices": 36
+    },
+    {
+     "name": "Cube.040",
+     "verts": 24,
+     "indices": 36
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/73f4d9f62ba07f6e/EW26_B2B_251205v2_compressed-optimized.glb",
+   "file": "EW26_B2B_251205v2_compressed-optimized.glb",
+   "bytes": 665123,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 125,
+   "meshes": 10,
+   "primitives": 10,
+   "vertices": 20408,
+   "indices": 72828,
+   "triangles": 24276,
+   "materials": 4,
+   "textures": 3,
+   "images": 3,
+   "skins": 4,
+   "animations": 1,
+   "bones": 111,
+   "skinned_primitives": 5,
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Sidekick_fg.004",
+     "verts": 102,
+     "indices": 366
+    },
+    {
+     "name": "Sidekick_fg.001",
+     "verts": 113,
+     "indices": 372
+    },
+    {
+     "name": "Plane.007",
+     "verts": 1196,
+     "indices": 5895
+    },
+    {
+     "name": "zform_B2B_Heads",
+     "verts": 5486,
+     "indices": 5748
+    },
+    {
+     "name": "Plane.004",
+     "verts": 1236,
+     "indices": 6114
+    },
+    {
+     "name": "Plane.005",
+     "verts": 1229,
+     "indices": 6084
+    },
+    {
+     "name": "zform_B2B_Heads.001",
+     "verts": 1104,
+     "indices": 5688
+    },
+    {
+     "name": "tripo_mesh_dc21b46c-e06a-4af7-924d-de0df043a851.002",
+     "verts": 9374,
+     "indices": 41073
+    },
+    {
+     "name": "Bench.002",
+     "verts": 284,
+     "indices": 744
+    },
+    {
+     "name": "Bench.001",
+     "verts": 284,
+     "indices": 744
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7ef7c7e3f77e5287/Online_fg_smaller_251127_compressed-optimized.glb",
+   "file": "Online_fg_smaller_251127_compressed-optimized.glb",
+   "bytes": 641951,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 42,
+   "meshes": 7,
+   "primitives": 8,
+   "vertices": 29603,
+   "indices": 86709,
+   "triangles": 28903,
+   "materials": 3,
+   "textures": 3,
+   "images": 3,
+   "skins": 2,
+   "animations": 1,
+   "bones": 33,
+   "skinned_primitives": 2,
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Online Computer.001",
+     "verts": 165,
+     "indices": 456
+    },
+    {
+     "name": "Online Decor.001",
+     "verts": 8304,
+     "indices": 12474
+    },
+    {
+     "name": "Online Base.003",
+     "verts": 24,
+     "indices": 36
+    },
+    {
+     "name": "online-man",
+     "verts": 16523,
+     "indices": 51093
+    },
+    {
+     "name": "Plane.002",
+     "verts": 1221,
+     "indices": 6039
+    },
+    {
+     "name": "Online Brush.001",
+     "verts": 768,
+     "indices": 1332
+    },
+    {
+     "name": "zform_OnlineTable",
+     "verts": 2598,
+     "indices": 15279
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/572da57473b77962/Marketing_fg_smaller_251127_compressed-optimized.glb",
+   "file": "Marketing_fg_smaller_251127_compressed-optimized.glb",
+   "bytes": 593930,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 2,
+   "meshes": 2,
+   "primitives": 2,
+   "vertices": 127635,
+   "indices": 149196,
+   "triangles": 49732,
+   "materials": 2,
+   "textures": 2,
+   "images": 2,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Marketing.001",
+     "verts": 127627,
+     "indices": 149184
+    },
+    {
+     "name": "Cube.002",
+     "verts": 8,
+     "indices": 12
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7aca351ff49a1198/Checkout_fg_smaller_251127_compressed-optimized.glb",
+   "file": "Checkout_fg_smaller_251127_compressed-optimized.glb",
+   "bytes": 540202,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 38,
+   "meshes": 5,
+   "primitives": 5,
+   "vertices": 9762,
+   "indices": 51396,
+   "triangles": 17132,
+   "materials": 2,
+   "textures": 1,
+   "images": 1,
+   "skins": 2,
+   "animations": 4,
+   "bones": 31,
+   "skinned_primitives": 2,
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Checkout Plants Right.001",
+     "verts": 2408,
+     "indices": 11478
+    },
+    {
+     "name": "Checkout.002",
+     "verts": 3324,
+     "indices": 18717
+    },
+    {
+     "name": "Checkout.003",
+     "verts": 423,
+     "indices": 2223
+    },
+    {
+     "name": "Mesh",
+     "verts": 3517,
+     "indices": 18756
+    },
+    {
+     "name": "checkout-card.001",
+     "verts": 90,
+     "indices": 222
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/374d9fa10f309fae/Shipping_fg_smaller_251127_compressed-optimized.glb",
+   "file": "Shipping_fg_smaller_251127_compressed-optimized.glb",
+   "bytes": 538111,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 41,
+   "meshes": 4,
+   "primitives": 4,
+   "vertices": 12360,
+   "indices": 54831,
+   "triangles": 18277,
+   "materials": 2,
+   "textures": 2,
+   "images": 2,
+   "skins": 1,
+   "animations": 2,
+   "bones": 36,
+   "skinned_primitives": 1,
+   "attributes": [
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Shipping_fg_label_diffuse",
+     "verts": 4,
+     "indices": 6
+    },
+    {
+     "name": "Shipping Box",
+     "verts": 225,
+     "indices": 624
+    },
+    {
+     "name": "Cheetah",
+     "verts": 12107,
+     "indices": 54165
+    },
+    {
+     "name": "Cube",
+     "verts": 24,
+     "indices": 36
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f889c7c758e60536/EW26_Checkout_251209_compressed-optimized.glb",
+   "file": "EW26_Checkout_251209_compressed-optimized.glb",
+   "bytes": 530849,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 40,
+   "meshes": 7,
+   "primitives": 7,
+   "vertices": 9386,
+   "indices": 49008,
+   "triangles": 16336,
+   "materials": 3,
+   "textures": 1,
+   "images": 1,
+   "skins": 2,
+   "animations": 4,
+   "bones": 31,
+   "skinned_primitives": 3,
+   "attributes": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Checkout Plants Right.001",
+     "verts": 2439,
+     "indices": 11481
+    },
+    {
+     "name": "Checkout.002",
+     "verts": 4120,
+     "indices": 23454
+    },
+    {
+     "name": "Checkout.003",
+     "verts": 423,
+     "indices": 2223
+    },
+    {
+     "name": "checkout-hand.002",
+     "verts": 1251,
+     "indices": 6216
+    },
+    {
+     "name": "shiny-cardchip",
+     "verts": 322,
+     "indices": 1404
+    },
+    {
+     "name": "checkout-card.001",
+     "verts": 90,
+     "indices": 222
+    },
+    {
+     "name": "checkout-hat",
+     "verts": 741,
+     "indices": 4008
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/3ffd3b2a5abbe541/EW26_ShopApp_251208v3_compressed-optimized.glb",
+   "file": "EW26_ShopApp_251208v3_compressed-optimized.glb",
+   "bytes": 491561,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 62,
+   "meshes": 6,
+   "primitives": 7,
+   "vertices": 9940,
+   "indices": 54444,
+   "triangles": 18148,
+   "materials": 3,
+   "textures": 2,
+   "images": 2,
+   "skins": 3,
+   "animations": 5,
+   "bones": 53,
+   "skinned_primitives": 3,
+   "attributes": [
+    "JOINTS_0",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "zform_ShopApp_fg_diffuse_Taller",
+     "verts": 5341,
+     "indices": 30525
+    },
+    {
+     "name": "Mesh",
+     "verts": 1506,
+     "indices": 8556
+    },
+    {
+     "name": "zform_ShopApp_fg_diffuse_Taller.003",
+     "verts": 1237,
+     "indices": 6636
+    },
+    {
+     "name": "checkout-hand.001",
+     "verts": 1190,
+     "indices": 5886
+    },
+    {
+     "name": "Cube.004",
+     "verts": 461,
+     "indices": 1788
+    },
+    {
+     "name": "zform_ShopApp_fg_diffuse_Taller.002",
+     "verts": 205,
+     "indices": 1053
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/63ac5b514230f82a/EW26_Sidekick_251208_compressed-optimized.glb",
+   "file": "EW26_Sidekick_251208_compressed-optimized.glb",
+   "bytes": 485834,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 7,
+   "meshes": 7,
+   "primitives": 7,
+   "vertices": 17127,
+   "indices": 78342,
+   "triangles": 26114,
+   "materials": 2,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 5,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "laptop bottom",
+     "verts": 9442,
+     "indices": 53700
+    },
+    {
+     "name": "eyelids",
+     "verts": 163,
+     "indices": 777
+    },
+    {
+     "name": "shiny-ring1",
+     "verts": 2570,
+     "indices": 8658
+    },
+    {
+     "name": "shiny-ring2",
+     "verts": 721,
+     "indices": 2763
+    },
+    {
+     "name": "shiny-ring4",
+     "verts": 703,
+     "indices": 2421
+    },
+    {
+     "name": "shiny-ring5",
+     "verts": 588,
+     "indices": 2634
+    },
+    {
+     "name": "shiny-ring6",
+     "verts": 2940,
+     "indices": 7389
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/b44ac013cda7d317/EW26_Operations_251207_compressed-optimized.glb",
+   "file": "EW26_Operations_251207_compressed-optimized.glb",
+   "bytes": 482847,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 26,
+   "meshes": 6,
+   "primitives": 6,
+   "vertices": 16807,
+   "indices": 98796,
+   "triangles": 32932,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 1,
+   "animations": 6,
+   "bones": 20,
+   "skinned_primitives": 1,
+   "attributes": [
+    "JOINTS_0",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "zform_Operations_fg_diffuse",
+     "verts": 16460,
+     "indices": 97305
+    },
+    {
+     "name": "eyes-m-01",
+     "verts": 80,
+     "indices": 348
+    },
+    {
+     "name": "eyes-m-02",
+     "verts": 63,
+     "indices": 258
+    },
+    {
+     "name": "eyes-m-03",
+     "verts": 75,
+     "indices": 330
+    },
+    {
+     "name": "eyes-w-01",
+     "verts": 52,
+     "indices": 216
+    },
+    {
+     "name": "eyes-w-02",
+     "verts": 77,
+     "indices": 339
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/6c9b3bf2f335a314/EW26_Sidekick_251207v4_compressed-optimized.glb",
+   "file": "EW26_Sidekick_251207v4_compressed-optimized.glb",
+   "bytes": 478011,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 7,
+   "meshes": 7,
+   "primitives": 7,
+   "vertices": 17994,
+   "indices": 90951,
+   "triangles": 30317,
+   "materials": 2,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 5,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "laptop bottom",
+     "verts": 9442,
+     "indices": 53700
+    },
+    {
+     "name": "eyelids",
+     "verts": 163,
+     "indices": 777
+    },
+    {
+     "name": "shiny-ring1",
+     "verts": 3982,
+     "indices": 21669
+    },
+    {
+     "name": "shiny-ring2",
+     "verts": 521,
+     "indices": 2409
+    },
+    {
+     "name": "shiny-ring4",
+     "verts": 456,
+     "indices": 2409
+    },
+    {
+     "name": "shiny-ring5",
+     "verts": 490,
+     "indices": 2598
+    },
+    {
+     "name": "shiny-ring6",
+     "verts": 2940,
+     "indices": 7389
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f10427420c475b24/EW26_ShopApp_251128v2_compressed-optimized.glb",
+   "file": "EW26_ShopApp_251128v2_compressed-optimized.glb",
+   "bytes": 461216,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 62,
+   "meshes": 6,
+   "primitives": 6,
+   "vertices": 8882,
+   "indices": 48195,
+   "triangles": 16065,
+   "materials": 2,
+   "textures": 1,
+   "images": 1,
+   "skins": 3,
+   "animations": 5,
+   "bones": 53,
+   "skinned_primitives": 3,
+   "attributes": [
+    "JOINTS_0",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "zform_ShopApp_fg_diffuse_Taller",
+     "verts": 4311,
+     "indices": 24417
+    },
+    {
+     "name": "Mesh",
+     "verts": 1506,
+     "indices": 8556
+    },
+    {
+     "name": "zform_ShopApp_fg_diffuse_Taller.003",
+     "verts": 1237,
+     "indices": 6636
+    },
+    {
+     "name": "checkout-hand.001",
+     "verts": 1193,
+     "indices": 5898
+    },
+    {
+     "name": "Cube.004",
+     "verts": 430,
+     "indices": 1635
+    },
+    {
+     "name": "zform_ShopApp_fg_diffuse_Taller.002",
+     "verts": 205,
+     "indices": 1053
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/2e684892a34b58b8/EW26_Marketing_251209v4_compressed-optimized.glb",
+   "file": "EW26_Marketing_251209v4_compressed-optimized.glb",
+   "bytes": 439275,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 2,
+   "meshes": 2,
+   "primitives": 2,
+   "vertices": 17816,
+   "indices": 93300,
+   "triangles": 31100,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "COLOR_0",
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Cube.002",
+     "verts": 12680,
+     "indices": 64491
+    },
+    {
+     "name": "Foreground",
+     "verts": 5136,
+     "indices": 28809
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/3ee03829a1050ecd/Checkout_bg_diffuse-optimized.glb",
+   "file": "Checkout_bg_diffuse-optimized.glb",
+   "bytes": 408556,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 1,
+   "meshes": 1,
+   "primitives": 1,
+   "vertices": 4,
+   "indices": 6,
+   "triangles": 2,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_texture_basisu"
+   ],
+   "draco": false,
+   "mesh_detail": [
+    {
+     "name": "?",
+     "verts": 4,
+     "indices": 6
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/050abac967c03cb4/Shipping_bg_diffuse-optimized.glb",
+   "file": "Shipping_bg_diffuse-optimized.glb",
+   "bytes": 364776,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 1,
+   "meshes": 1,
+   "primitives": 1,
+   "vertices": 4,
+   "indices": 6,
+   "triangles": 2,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_texture_basisu"
+   ],
+   "draco": false,
+   "mesh_detail": [
+    {
+     "name": "?",
+     "verts": 4,
+     "indices": 6
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/7293d075302eb118/Developer_bg_diffuse-optimized.glb",
+   "file": "Developer_bg_diffuse-optimized.glb",
+   "bytes": 332165,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 1,
+   "meshes": 1,
+   "primitives": 1,
+   "vertices": 4,
+   "indices": 6,
+   "triangles": 2,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_texture_basisu"
+   ],
+   "draco": false,
+   "mesh_detail": [
+    {
+     "name": "?",
+     "verts": 4,
+     "indices": 6
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f8cc4911eb12bc06/key.glb",
+   "file": "key.glb",
+   "bytes": 331692,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 1,
+   "meshes": 1,
+   "primitives": 1,
+   "vertices": 4822,
+   "indices": 12486,
+   "triangles": 4162,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "?",
+     "verts": 4822,
+     "indices": 12486
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/e51a31d48a973f83/POS_v53_Hub_251208v2_compressed-optimized.glb",
+   "file": "POS_v53_Hub_251208v2_compressed-optimized.glb",
+   "bytes": 306269,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 8,
+   "meshes": 7,
+   "primitives": 8,
+   "vertices": 42037,
+   "indices": 110208,
+   "triangles": 36736,
+   "materials": 7,
+   "textures": 2,
+   "images": 2,
+   "skins": 0,
+   "animations": 1,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_ior",
+    "KHR_materials_specular",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "pos-markings",
+     "verts": 6273,
+     "indices": 16119
+    },
+    {
+     "name": "pos-bottom",
+     "verts": 6057,
+     "indices": 17490
+    },
+    {
+     "name": "pos-logo",
+     "verts": 186,
+     "indices": 585
+    },
+    {
+     "name": "pos-pcb",
+     "verts": 7376,
+     "indices": 28179
+    },
+    {
+     "name": "pos-ports",
+     "verts": 12656,
+     "indices": 23319
+    },
+    {
+     "name": "pos-screws",
+     "verts": 990,
+     "indices": 1806
+    },
+    {
+     "name": "pos-top",
+     "verts": 8499,
+     "indices": 22710
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/bba83c9869d8879f/Agentic_fg_251209_compressed-optimized.glb",
+   "file": "Agentic_fg_251209_compressed-optimized.glb",
+   "bytes": 284585,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 1,
+   "meshes": 1,
+   "primitives": 1,
+   "vertices": 25493,
+   "indices": 150741,
+   "triangles": 50247,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "zform_Agentic_fg_251207",
+     "verts": 25493,
+     "indices": 150741
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/f6baf7645c1fa52e/EW26_Sidekick_bg_stars-optimized.glb",
+   "file": "EW26_Sidekick_bg_stars-optimized.glb",
+   "bytes": 245913,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 1,
+   "meshes": 1,
+   "primitives": 1,
+   "vertices": 4,
+   "indices": 6,
+   "triangles": 2,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_texture_basisu"
+   ],
+   "draco": false,
+   "mesh_detail": [
+    {
+     "name": "?",
+     "verts": 4,
+     "indices": 6
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/510af84586abddc1/EW26_Agentic_Props_251209v5_compressed-optimized.glb",
+   "file": "EW26_Agentic_Props_251209v5_compressed-optimized.glb",
+   "bytes": 166420,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 10,
+   "meshes": 9,
+   "primitives": 10,
+   "vertices": 6984,
+   "indices": 32484,
+   "triangles": 10828,
+   "materials": 3,
+   "textures": 2,
+   "images": 2,
+   "skins": 0,
+   "animations": 1,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Plane.009",
+     "verts": 102,
+     "indices": 270
+    },
+    {
+     "name": "Wheel_03_Skateboard_0",
+     "verts": 294,
+     "indices": 1110
+    },
+    {
+     "name": "Plane.004",
+     "verts": 102,
+     "indices": 270
+    },
+    {
+     "name": "Wheel",
+     "verts": 517,
+     "indices": 2112
+    },
+    {
+     "name": "Plane.002",
+     "verts": 102,
+     "indices": 270
+    },
+    {
+     "name": "Shoes",
+     "verts": 1375,
+     "indices": 6477
+    },
+    {
+     "name": "Plane",
+     "verts": 102,
+     "indices": 270
+    },
+    {
+     "name": "Cap",
+     "verts": 1243,
+     "indices": 4326
+    },
+    {
+     "name": "Shirt",
+     "verts": 3147,
+     "indices": 17379
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/4f6a13588214983f/ShopApp_bg_diffuse-optimized.glb",
+   "file": "ShopApp_bg_diffuse-optimized.glb",
+   "bytes": 166221,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 1,
+   "meshes": 1,
+   "primitives": 1,
+   "vertices": 4,
+   "indices": 6,
+   "triangles": 2,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_texture_basisu"
+   ],
+   "draco": false,
+   "mesh_detail": [
+    {
+     "name": "?",
+     "verts": 4,
+     "indices": 6
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/340659b51fac6b47/Finance_bg_diffuse-optimized.glb",
+   "file": "Finance_bg_diffuse-optimized.glb",
+   "bytes": 138278,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 1,
+   "meshes": 1,
+   "primitives": 1,
+   "vertices": 4,
+   "indices": 6,
+   "triangles": 2,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_texture_basisu"
+   ],
+   "draco": false,
+   "mesh_detail": [
+    {
+     "name": "?",
+     "verts": 4,
+     "indices": 6
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/769326e346db969d/Operations_bg_diffuse-optimized.glb",
+   "file": "Operations_bg_diffuse-optimized.glb",
+   "bytes": 125380,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 1,
+   "meshes": 1,
+   "primitives": 1,
+   "vertices": 4,
+   "indices": 6,
+   "triangles": 2,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_texture_basisu"
+   ],
+   "draco": false,
+   "mesh_detail": [
+    {
+     "name": "?",
+     "verts": 4,
+     "indices": 6
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/0337cd9bc6d18b55/Renaissance_Globe_251209v2-optimized.glb",
+   "file": "Renaissance_Globe_251209v2-optimized.glb",
+   "bytes": 79253,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 1,
+   "meshes": 1,
+   "primitives": 1,
+   "vertices": 3829,
+   "indices": 21240,
+   "triangles": 7080,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 0,
+   "animations": 0,
+   "bones": 0,
+   "skinned_primitives": 0,
+   "attributes": [
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "earth",
+     "verts": 3829,
+     "indices": 21240
+    }
+   ]
+  },
+  {
+   "url": "https://editions-winter-2026.myshopify.com/cdn/shop/3d/models/o/9567eaad495dfa3f/Rigged_Book_CS_Animated_V5_compressed-optimized.glb",
+   "file": "Rigged_Book_CS_Animated_V5_compressed-optimized.glb",
+   "bytes": 54060,
+   "gltf_version": 2,
+   "generator": "glTF-Transform v4.2.1",
+   "nodes": 103,
+   "meshes": 7,
+   "primitives": 7,
+   "vertices": 2300,
+   "indices": 10848,
+   "triangles": 3616,
+   "materials": 1,
+   "textures": 1,
+   "images": 1,
+   "skins": 6,
+   "animations": 1,
+   "bones": 90,
+   "skinned_primitives": 6,
+   "attributes": [
+    "JOINTS_0",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "primitive_modes": [
+    4
+   ],
+   "extensions_used": [
+    "KHR_draco_mesh_compression",
+    "KHR_materials_unlit",
+    "KHR_texture_basisu"
+   ],
+   "draco": true,
+   "mesh_detail": [
+    {
+     "name": "Cube",
+     "verts": 1292,
+     "indices": 5700
+    },
+    {
+     "name": "Plane.012",
+     "verts": 168,
+     "indices": 858
+    },
+    {
+     "name": "Plane.003",
+     "verts": 168,
+     "indices": 858
+    },
+    {
+     "name": "Plane.004",
+     "verts": 168,
+     "indices": 858
+    },
+    {
+     "name": "Plane.005",
+     "verts": 168,
+     "indices": 858
+    },
+    {
+     "name": "Plane.006",
+     "verts": 168,
+     "indices": 858
+    },
+    {
+     "name": "Plane.007",
+     "verts": 168,
+     "indices": 858
+    }
+   ]
+  }
+ ],
+ "failed": []
+}
